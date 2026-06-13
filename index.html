@@ -5,29 +5,27 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Congreso Raíz de Paz · Jueces de Paz · Bogotá 2026</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ─── TOKENS ─── */
+/* ─── TOKENS · Paleta Personería de Bogotá ─── */
 :root {
-  --tierra:    #3D2314;
-  --corteza:   #6B3A1F;
-  --arcilla:   #A0522D;
-  --ocre:      #C8873A;
-  --dorado:    #D4A017;
-  --musgo:     #4A6741;
-  --verde:     #2D5A27;
-  --hoja:      #6B8C42;
-  --crema:     #F5EDD8;
-  --pergamino: #EDE0C4;
-  --blanco:    #FDFAF4;
-  --texto:     #1C1008;
-  --gris:      #6B5E4E;
+  --azul:       #004A93;   /* azul institucional Personería */
+  --azul-osc:   #00336B;
+  --azul-prof:  #022A52;
+  --verde:      #2D6A4F;   /* verde raíz */
+  --verde-claro:#52B788;
+  --verde-hoja: #74A57F;
+  --dorado:     #F4B72E;   /* dorado Personería */
+  --dorado-suave:#FFD970;
+  --celeste:    #E8F1FA;
+  --menta:      #EAF5EF;
+  --blanco:     #FDFEFE;
+  --texto:      #10243B;
+  --gris:       #4E6177;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html { scroll-behavior: smooth; }
-
 body {
   font-family: 'Source Serif 4', Georgia, serif;
   background: var(--blanco);
@@ -38,26 +36,26 @@ body {
 /* ─── NAV ─── */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  background: rgba(29, 16, 6, 0.95);
+  background: rgba(2, 42, 82, 0.96);
   backdrop-filter: blur(8px);
   display: flex; align-items: center; justify-content: space-between;
   padding: 0 40px;
   height: 64px;
-  border-bottom: 1px solid rgba(212,160,23,0.3);
+  border-bottom: 2px solid var(--dorado);
 }
 .nav-logo {
   font-family: 'Playfair Display', serif;
   font-size: 15px; font-weight: 700;
   color: var(--dorado); letter-spacing: 0.5px;
-  text-decoration: none;
+  text-decoration: none; white-space: nowrap;
 }
-.nav-logo span { color: rgba(255,255,255,0.5); font-weight: 300; }
-.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-logo span { color: rgba(255,255,255,0.55); font-weight: 300; }
+.nav-links { display: flex; gap: 26px; list-style: none; }
 .nav-links a {
   font-family: 'Inter', sans-serif;
   font-size: 12px; font-weight: 500;
-  letter-spacing: 1.5px; text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
+  letter-spacing: 1.3px; text-transform: uppercase;
+  color: rgba(255,255,255,0.78);
   text-decoration: none; transition: color 0.2s;
 }
 .nav-links a:hover { color: var(--dorado); }
@@ -65,121 +63,147 @@ nav {
   font-family: 'Inter', sans-serif;
   font-size: 12px; font-weight: 600;
   letter-spacing: 1px; text-transform: uppercase;
-  background: var(--dorado); color: var(--tierra);
-  padding: 8px 20px; border-radius: 2px;
+  background: var(--dorado); color: var(--azul-prof);
+  padding: 8px 20px; border-radius: 3px;
   text-decoration: none; transition: background 0.2s;
 }
-.nav-cta:hover { background: var(--ocre); color: #fff; }
+.nav-cta:hover { background: var(--dorado-suave); }
+
+/* Menú hamburguesa (móvil) */
+.nav-burger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer;
+  padding: 8px;
+}
+.nav-burger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--dorado); transition: all 0.3s;
+}
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
+  background: var(--azul-prof);
+  border-bottom: 2px solid var(--dorado);
+  display: none; flex-direction: column;
+  padding: 12px 0;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; font-weight: 500;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  padding: 16px 32px;
+  border-bottom: 1px solid rgba(244,183,46,0.12);
+  transition: all 0.2s;
+}
+.mobile-menu a:hover, .mobile-menu a:active { background: rgba(244,183,46,0.1); color: var(--dorado); }
+.mobile-menu a:last-child { border-bottom: none; }
 
 /* ─── HERO ─── */
 #hero {
   min-height: 100vh;
-  background: var(--tierra);
+  background: linear-gradient(160deg, var(--azul-prof) 0%, var(--azul) 55%, #0A5C8C 100%);
   position: relative; overflow: hidden;
   display: flex; align-items: center;
   padding-top: 64px;
 }
-/* SVG raíces de fondo */
 #hero::before {
   content: '';
   position: absolute; inset: 0;
   background:
-    radial-gradient(ellipse 80% 60% at 70% 50%, rgba(107,58,31,0.6) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 80% at 20% 80%, rgba(74,103,65,0.3) 0%, transparent 60%);
+    radial-gradient(ellipse 70% 55% at 75% 45%, rgba(45,106,79,0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 45% 70% at 15% 85%, rgba(82,183,136,0.18) 0%, transparent 60%);
 }
 .hero-roots {
   position: absolute; bottom: 0; left: 0; right: 0;
-  height: 280px; opacity: 0.15;
+  height: 240px; opacity: 0.22;
 }
 .hero-inner {
   position: relative; z-index: 2;
   max-width: 1200px; margin: 0 auto;
-  padding: 80px 60px;
-  display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center;
+  padding: 70px 60px;
+  display: grid; grid-template-columns: 1fr 420px; gap: 70px; align-items: center;
+  width: 100%;
 }
 .hero-eyebrow {
   font-family: 'Inter', sans-serif;
   font-size: 11px; font-weight: 600;
   letter-spacing: 3px; text-transform: uppercase;
-  color: var(--dorado); margin-bottom: 24px;
+  color: var(--dorado); margin-bottom: 22px;
   display: flex; align-items: center; gap: 12px;
 }
-.hero-eyebrow::before {
-  content: ''; display: block;
-  width: 32px; height: 1px; background: var(--dorado);
-}
+.hero-eyebrow::before { content: ''; display: block; width: 32px; height: 1px; background: var(--dorado); }
 .hero-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(44px, 5vw, 72px);
+  font-size: clamp(42px, 5vw, 72px);
   font-weight: 900; line-height: 1.05;
-  color: var(--crema); margin-bottom: 8px;
+  color: #fff; margin-bottom: 8px;
 }
-.hero-title em {
-  color: var(--dorado); font-style: italic;
-  display: block;
-}
+.hero-title em { color: var(--dorado); font-style: italic; display: block; }
 .hero-subtitle {
-  font-family: 'Source Serif 4', serif;
   font-size: 18px; font-weight: 300; font-style: italic;
-  color: rgba(245,237,216,0.7);
-  margin-bottom: 48px; line-height: 1.5;
+  color: rgba(255,255,255,0.78);
+  margin-bottom: 40px; line-height: 1.5;
 }
 .hero-tagline {
-  font-family: 'Source Serif 4', serif;
   font-size: 14px; font-style: italic;
-  color: var(--dorado); opacity: 0.8;
-  margin-bottom: 48px;
+  color: var(--dorado-suave);
+  margin-bottom: 44px;
   padding-left: 16px;
   border-left: 2px solid var(--dorado);
 }
-.hero-cta-group { display: flex; gap: 16px; flex-wrap: wrap; }
+.hero-cta-group { display: flex; gap: 14px; flex-wrap: wrap; }
 .btn-primary {
   font-family: 'Inter', sans-serif;
   font-size: 13px; font-weight: 600;
   letter-spacing: 1px; text-transform: uppercase;
-  background: var(--dorado); color: var(--tierra);
-  padding: 14px 32px; border-radius: 2px;
+  background: var(--dorado); color: var(--azul-prof);
+  padding: 14px 30px; border-radius: 3px;
   text-decoration: none; transition: all 0.2s;
   display: inline-block;
 }
-.btn-primary:hover { background: var(--ocre); color: #fff; transform: translateY(-1px); }
+.btn-primary:hover { background: var(--dorado-suave); transform: translateY(-1px); }
 .btn-outline {
   font-family: 'Inter', sans-serif;
   font-size: 13px; font-weight: 600;
   letter-spacing: 1px; text-transform: uppercase;
-  border: 1px solid rgba(245,237,216,0.4); color: var(--crema);
-  padding: 14px 32px; border-radius: 2px;
+  border: 1px solid rgba(255,255,255,0.45); color: #fff;
+  padding: 14px 30px; border-radius: 3px;
   text-decoration: none; transition: all 0.2s;
   display: inline-block;
 }
 .btn-outline:hover { border-color: var(--dorado); color: var(--dorado); }
 
-/* Emblema paloma */
-.hero-emblem {
-  display: flex; flex-direction: column; align-items: center; gap: 24px;
-}
+/* Emblema */
+.hero-emblem { display: flex; flex-direction: column; align-items: center; gap: 22px; }
 .emblem-circle {
-  width: 280px; height: 280px;
+  width: 260px; height: 260px;
   border-radius: 50%;
-  border: 2px solid rgba(212,160,23,0.4);
+  border: 2px solid rgba(244,183,46,0.5);
   display: flex; align-items: center; justify-content: center;
   position: relative;
+  background: rgba(255,255,255,0.04);
 }
 .emblem-circle::before {
   content: '';
   position: absolute; inset: 12px;
   border-radius: 50%;
-  border: 1px solid rgba(212,160,23,0.2);
+  border: 1px solid rgba(244,183,46,0.25);
 }
-.emblem-svg { width: 160px; height: 160px; }
-.emblem-datos {
-  display: flex; flex-direction: column; gap: 12px; width: 100%;
-}
+.emblem-svg { width: 150px; height: 150px; }
+.emblem-logo { width: 145px; height: auto; max-height: 175px; object-fit: contain; }
+.emblem-datos { display: flex; flex-direction: column; gap: 10px; width: 100%; }
 .dato-item {
   display: flex; align-items: flex-start; gap: 12px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(212,160,23,0.15);
-  border-radius: 4px; padding: 14px 16px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(244,183,46,0.22);
+  border-radius: 5px; padding: 13px 16px;
 }
 .dato-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
 .dato-label {
@@ -188,309 +212,274 @@ nav {
   letter-spacing: 1.5px; text-transform: uppercase;
   color: var(--dorado); display: block; margin-bottom: 2px;
 }
-.dato-val {
-  font-family: 'Source Serif 4', serif;
-  font-size: 14px; color: var(--crema);
-}
+.dato-val { font-size: 14px; color: #fff; }
 
 /* ─── SECCIÓN GENÉRICA ─── */
-section { padding: 100px 0; }
+section { padding: 90px 0; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 60px; }
 .section-tag {
   font-family: 'Inter', sans-serif;
-  font-size: 10px; font-weight: 600;
+  font-size: 10px; font-weight: 700;
   letter-spacing: 3px; text-transform: uppercase;
-  color: var(--arcilla);
-  margin-bottom: 16px; display: flex; align-items: center; gap: 12px;
+  color: var(--verde);
+  margin-bottom: 14px; display: flex; align-items: center; gap: 12px;
 }
-.section-tag::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--arcilla); }
+.section-tag::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--verde); }
 .section-title {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(30px, 3vw, 44px);
+  font-size: clamp(28px, 3vw, 42px);
   font-weight: 700; line-height: 1.15;
-  color: var(--tierra); margin-bottom: 20px;
+  color: var(--azul); margin-bottom: 18px;
 }
 .section-lead {
   font-size: 17px; font-weight: 300; font-style: italic;
   color: var(--gris); line-height: 1.7;
-  max-width: 680px; margin-bottom: 60px;
+  max-width: 680px; margin-bottom: 52px;
 }
 
-/* ─── CONTEXTO / CIFRAS ANDINAS ─── */
-#contexto { background: var(--pergamino); }
-.andean-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
-  margin-bottom: 60px;
+/* ─── ORGANIZA · LOGOS ─── */
+#organiza-hero {
+  background: var(--blanco);
+  padding: 56px 0;
+  border-bottom: 1px solid var(--celeste);
 }
+.org-row { display: flex; align-items: center; justify-content: center; gap: 48px; flex-wrap: wrap; }
+.org-block { text-align: center; }
+.org-block-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 2.5px; text-transform: uppercase;
+  color: var(--verde); margin-bottom: 16px; display: block;
+}
+.logos-strip { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; justify-content: center; }
+.logo-chip {
+  background: #fff;
+  border: 1px solid var(--celeste);
+  border-radius: 8px;
+  padding: 12px 18px;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 66px; min-width: 110px;
+  box-shadow: 0 2px 12px rgba(0,74,147,0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.logo-chip:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,74,147,0.12); }
+.logo-chip img { max-height: 46px; max-width: 130px; object-fit: contain; }
+.logo-chip.dark { background: var(--azul-prof); border-color: var(--azul-prof); }
+.logo-chip.principal { border: 2px solid var(--dorado); min-height: 80px; }
+.logo-chip.principal img { max-height: 58px; max-width: 160px; }
+.logo-fallback {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; font-weight: 600;
+  color: var(--azul); text-align: center; line-height: 1.4;
+  display: none;
+}
+.logo-chip.dark .logo-fallback { color: #fff; }
+.org-divider {
+  width: 1px; height: 70px; background: var(--celeste);
+}
+
+/* ─── CONTEXTO ─── */
+#contexto { background: var(--celeste); }
+.andean-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 56px; }
 .andean-card {
-  background: var(--tierra); color: var(--crema);
-  padding: 40px 36px;
+  background: var(--azul); color: #fff;
+  padding: 38px 34px; border-radius: 8px;
   position: relative; overflow: hidden;
-  cursor: pointer; transition: transform 0.3s;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.andean-card:hover { transform: translateY(-4px); z-index: 2; }
-.andean-card.ecuador { background: var(--corteza); }
-.andean-card.peru    { background: var(--musgo); }
+.andean-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(0,74,147,0.25); }
+.andean-card.ecuador { background: var(--verde); }
+.andean-card.peru    { background: #0A5C8C; }
 .andean-card::after {
-  content: '';
-  position: absolute; bottom: 0; left: 0; right: 0;
-  height: 3px; background: var(--dorado);
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 4px; background: var(--dorado);
 }
 .country-tag {
-  font-family: 'Inter', sans-serif;
-  font-size: 10px; font-weight: 600;
-  letter-spacing: 3px; text-transform: uppercase;
-  color: var(--dorado); margin-bottom: 20px;
-  display: block;
+  display: flex; align-items: center; gap: 14px;
+  margin-bottom: 18px;
+}
+.country-flag {
+  font-size: 44px; line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.25));
+}
+.country-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 700;
+  color: #fff; letter-spacing: 0.5px;
 }
 .big-number {
   font-family: 'Playfair Display', serif;
-  font-size: 72px; font-weight: 900; line-height: 1;
+  font-size: 68px; font-weight: 900; line-height: 1;
   color: var(--dorado); margin-bottom: 4px;
 }
-.big-label {
-  font-size: 13px; color: rgba(245,237,216,0.6);
-  margin-bottom: 24px; font-weight: 300;
-}
+.big-label { font-size: 13px; color: rgba(255,255,255,0.72); margin-bottom: 22px; font-weight: 300; }
 .card-facts { list-style: none; }
 .card-facts li {
   font-family: 'Inter', sans-serif;
-  font-size: 12px; color: rgba(245,237,216,0.8);
-  padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.1);
+  font-size: 12px; color: rgba(255,255,255,0.88);
+  padding: 8px 0; border-top: 1px solid rgba(255,255,255,0.15);
   display: flex; gap: 8px;
 }
 .card-facts li::before { content: '·'; color: var(--dorado); flex-shrink: 0; }
 
-/* workshop salas */
-.salas-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;
-}
+.salas-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
 .sala-card {
-  background: var(--blanco);
-  border: 1px solid rgba(160,82,45,0.15);
-  border-radius: 4px; padding: 32px;
+  background: #fff;
+  border: 1px solid rgba(0,74,147,0.12);
+  border-radius: 8px; padding: 30px;
   position: relative; overflow: hidden;
   transition: box-shadow 0.2s;
-  cursor: pointer;
 }
-.sala-card:hover { box-shadow: 0 8px 32px rgba(61,35,20,0.12); }
+.sala-card:hover { box-shadow: 0 8px 28px rgba(0,74,147,0.12); }
 .sala-card::before {
   content: attr(data-num);
-  position: absolute; top: -10px; right: 20px;
+  position: absolute; top: -12px; right: 18px;
   font-family: 'Playfair Display', serif;
-  font-size: 90px; font-weight: 900;
-  color: rgba(160,82,45,0.06); line-height: 1;
+  font-size: 88px; font-weight: 900;
+  color: rgba(0,74,147,0.05); line-height: 1;
 }
 .sala-num {
   font-family: 'Inter', sans-serif;
-  font-size: 10px; font-weight: 600;
+  font-size: 10px; font-weight: 700;
   letter-spacing: 2px; text-transform: uppercase;
-  color: var(--ocre); margin-bottom: 12px;
+  color: var(--verde); margin-bottom: 10px;
 }
 .sala-title {
   font-family: 'Playfair Display', serif;
-  font-size: 20px; font-weight: 700;
-  color: var(--tierra); margin-bottom: 12px;
-  line-height: 1.3;
+  font-size: 19px; font-weight: 700;
+  color: var(--azul); margin-bottom: 12px; line-height: 1.3;
 }
-.sala-desc {
-  font-size: 14px; color: var(--gris);
-  line-height: 1.6; margin-bottom: 20px;
-}
-.sala-mod {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px; color: var(--arcilla);
-  font-weight: 500;
-}
-.sala-mod strong { display: block; margin-bottom: 2px; color: var(--gris); font-weight: 400; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
+.sala-desc { font-size: 14px; color: var(--gris); line-height: 1.6; margin-bottom: 18px; }
+.sala-mod { font-family: 'Inter', sans-serif; font-size: 11px; color: var(--verde); font-weight: 600; }
+.sala-mod strong { display: block; margin-bottom: 2px; color: var(--gris); font-weight: 500; font-size: 10px; letter-spacing: 1px; text-transform: uppercase; }
 
 /* ─── AGENDA ─── */
 #agenda { background: var(--blanco); }
-.agenda-tabs {
-  display: flex; gap: 2px;
-  background: var(--pergamino); border-radius: 4px;
-  padding: 4px; margin-bottom: 48px; max-width: 500px;
+.agenda-day-banner {
+  display: inline-flex; align-items: center; gap: 14px;
+  background: var(--azul); border-radius: 6px;
+  padding: 14px 26px; margin-bottom: 44px;
 }
-.tab-btn {
-  flex: 1; font-family: 'Inter', sans-serif;
-  font-size: 12px; font-weight: 600;
-  letter-spacing: 1px; text-transform: uppercase;
-  padding: 12px 20px; border: none; border-radius: 2px;
-  cursor: pointer; transition: all 0.2s;
-  background: transparent; color: var(--gris);
+.agenda-day-banner .day-big {
+  font-family: 'Playfair Display', serif;
+  font-size: 30px; font-weight: 900; color: var(--dorado); line-height: 1;
 }
-.tab-btn.active { background: var(--tierra); color: var(--dorado); }
-.tab-panel { display: none; }
-.tab-panel.active { display: block; }
+.agenda-day-banner .day-info { font-family: 'Inter', sans-serif; }
+.agenda-day-banner .day-date { font-size: 14px; font-weight: 600; color: #fff; }
+.agenda-day-banner .day-mode { font-size: 11px; color: var(--dorado-suave); letter-spacing: 1px; text-transform: uppercase; }
 
 .timeline { position: relative; }
 .timeline::before {
   content: ''; position: absolute; left: 88px; top: 0; bottom: 0;
-  width: 1px; background: rgba(160,82,45,0.2);
+  width: 1px; background: rgba(0,74,147,0.18);
 }
-.t-item {
-  display: grid; grid-template-columns: 88px 1fr;
-  gap: 0; margin-bottom: 4px;
-  position: relative;
-}
+.t-item { display: grid; grid-template-columns: 88px 1fr; margin-bottom: 4px; position: relative; }
 .t-time {
   font-family: 'Inter', sans-serif;
   font-size: 11px; font-weight: 600;
-  color: var(--arcilla); padding: 16px 24px 16px 0;
+  color: var(--verde); padding: 16px 22px 16px 0;
   text-align: right; padding-top: 20px;
 }
 .t-content {
   border-left: 3px solid transparent;
-  padding: 16px 24px;
-  background: var(--blanco);
-  margin-left: -1px;
+  padding: 16px 22px;
   transition: background 0.2s;
 }
-.t-item:hover .t-content { background: var(--pergamino); }
-.t-item.highlight .t-content {
-  border-left-color: var(--dorado);
-  background: rgba(212,160,23,0.04);
-}
-.t-item.panel .t-content { border-left-color: var(--musgo); }
-.t-item.keynote .t-content { border-left-color: var(--arcilla); }
-.t-item.special .t-content { border-left-color: var(--tierra); }
+.t-item:hover .t-content { background: var(--celeste); }
+.t-item.highlight .t-content { border-left-color: var(--dorado); background: rgba(244,183,46,0.06); }
+.t-item.panel .t-content   { border-left-color: var(--verde); }
+.t-item.keynote .t-content { border-left-color: var(--azul); }
+.t-item.special .t-content { border-left-color: #0A5C8C; }
 .t-badge {
   font-family: 'Inter', sans-serif;
   font-size: 9px; font-weight: 700;
   letter-spacing: 1.5px; text-transform: uppercase;
-  padding: 2px 8px; border-radius: 2px;
+  padding: 3px 9px; border-radius: 3px;
   margin-bottom: 6px; display: inline-block;
 }
-.badge-apertura  { background: rgba(61,35,20,0.1); color: var(--tierra); }
-.badge-conferencia { background: rgba(160,82,45,0.12); color: var(--arcilla); }
-.badge-panel    { background: rgba(74,103,65,0.12); color: var(--musgo); }
-.badge-qa       { background: rgba(200,135,58,0.12); color: var(--ocre); }
-.badge-receso   { background: rgba(107,94,78,0.1); color: var(--gris); }
-.badge-cierre   { background: rgba(61,35,20,0.15); color: var(--tierra); }
-.badge-especial { background: rgba(212,160,23,0.15); color: var(--corteza); }
-.t-name {
-  font-family: 'Source Serif 4', serif;
-  font-size: 15px; font-weight: 600; color: var(--tierra);
-  margin-bottom: 4px;
-}
-.t-person {
-  font-family: 'Inter', sans-serif;
-  font-size: 12px; color: var(--gris);
-}
-
-/* Día 2 */
-.dia2-card {
-  background: var(--tierra); color: var(--crema);
-  border-radius: 4px; padding: 48px; text-align: center;
-}
-.dia2-card h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px; color: var(--dorado); margin-bottom: 16px;
-}
-.dia2-card p { font-size: 16px; line-height: 1.7; opacity: 0.8; max-width: 600px; margin: 0 auto 32px; }
-.dia2-pills { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
-.dia2-pill {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px; font-weight: 600;
-  letter-spacing: 1px; text-transform: uppercase;
-  border: 1px solid rgba(212,160,23,0.4); color: var(--dorado);
-  padding: 8px 16px; border-radius: 2px;
-}
+.badge-apertura    { background: rgba(0,74,147,0.1); color: var(--azul); }
+.badge-conferencia { background: rgba(0,74,147,0.12); color: var(--azul); }
+.badge-panel       { background: rgba(45,106,79,0.12); color: var(--verde); }
+.badge-qa          { background: rgba(244,183,46,0.18); color: #9C7415; }
+.badge-receso      { background: rgba(78,97,119,0.1); color: var(--gris); }
+.badge-cierre      { background: rgba(0,51,107,0.14); color: var(--azul-osc); }
+.badge-especial    { background: rgba(244,183,46,0.22); color: #8A6510; }
+.t-name { font-size: 15px; font-weight: 600; color: var(--texto); margin-bottom: 4px; }
+.t-person { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--gris); line-height: 1.55; }
 
 /* ─── PONENTES ─── */
-#ponentes { background: var(--crema); }
-.speakers-filter {
-  display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 48px;
-}
+#ponentes { background: var(--menta); }
+.speakers-filter { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 44px; }
 .filter-btn {
   font-family: 'Inter', sans-serif;
   font-size: 11px; font-weight: 600;
   letter-spacing: 1px; text-transform: uppercase;
-  padding: 8px 20px; border-radius: 2px;
-  border: 1px solid rgba(160,82,45,0.3);
-  background: transparent; color: var(--gris);
+  padding: 8px 18px; border-radius: 20px;
+  border: 1px solid rgba(0,74,147,0.3);
+  background: #fff; color: var(--gris);
   cursor: pointer; transition: all 0.2s;
 }
-.filter-btn.active,
-.filter-btn:hover { background: var(--tierra); color: var(--dorado); border-color: var(--tierra); }
+.filter-btn.active, .filter-btn:hover { background: var(--azul); color: var(--dorado); border-color: var(--azul); }
 
-.speakers-grid {
-  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2px;
-}
+.speakers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(255px, 1fr)); gap: 14px; }
 .speaker-card {
-  background: var(--blanco); padding: 28px 24px;
+  background: #fff; padding: 26px 22px;
+  border-radius: 8px;
+  border: 1px solid rgba(0,74,147,0.08);
   cursor: pointer; transition: all 0.25s;
   position: relative; overflow: hidden;
 }
 .speaker-card::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0;
-  height: 2px; background: var(--dorado);
+  height: 3px; background: var(--dorado);
   transform: scaleX(0); transform-origin: left;
   transition: transform 0.3s;
 }
-.speaker-card:hover { background: var(--tierra); }
+.speaker-card:hover { background: var(--azul); transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,74,147,0.2); }
 .speaker-card:hover::after { transform: scaleX(1); }
 .speaker-card:hover .sp-name { color: var(--dorado); }
-.speaker-card:hover .sp-role,
-.speaker-card:hover .sp-inst { color: rgba(245,237,216,0.7); }
-.speaker-card:hover .sp-pais { border-color: rgba(212,160,23,0.4); color: var(--dorado); }
+.speaker-card:hover .sp-role, .speaker-card:hover .sp-inst { color: rgba(255,255,255,0.78); }
+.speaker-card:hover .sp-pais { border-color: rgba(244,183,46,0.5); color: var(--dorado); }
 .speaker-card:hover .sp-expand { color: var(--dorado); }
 
-.sp-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 16px; }
+.sp-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 14px; }
 .sp-avatar {
-  width: 52px; height: 52px; border-radius: 50%;
+  width: 50px; height: 50px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
   font-family: 'Playfair Display', serif;
-  font-size: 18px; font-weight: 700;
-  color: var(--blanco); flex-shrink: 0;
+  font-size: 17px; font-weight: 700;
+  color: #fff; flex-shrink: 0;
 }
 .sp-pais {
   font-family: 'Inter', sans-serif;
   font-size: 9px; font-weight: 700;
   letter-spacing: 1.5px; text-transform: uppercase;
-  padding: 4px 10px; border-radius: 2px;
-  border: 1px solid rgba(160,82,45,0.25); color: var(--gris);
+  padding: 4px 10px; border-radius: 12px;
+  border: 1px solid rgba(0,74,147,0.22); color: var(--gris);
+  transition: all 0.25s;
 }
-.sp-name {
-  font-family: 'Source Serif 4', serif;
-  font-size: 16px; font-weight: 600;
-  color: var(--tierra); margin-bottom: 4px;
-  line-height: 1.3; transition: color 0.25s;
-}
-.sp-role {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px; color: var(--arcilla);
-  font-weight: 500; margin-bottom: 2px;
-  transition: color 0.25s;
-}
-.sp-inst {
-  font-family: 'Inter', sans-serif;
-  font-size: 11px; color: var(--gris);
-  font-weight: 400; margin-bottom: 16px;
-  transition: color 0.25s;
-}
-.sp-expand {
-  font-family: 'Inter', sans-serif;
-  font-size: 10px; color: var(--arcilla);
-  text-transform: uppercase; letter-spacing: 1px;
-  font-weight: 600; transition: color 0.25s;
-}
+.sp-name { font-size: 16px; font-weight: 600; color: var(--azul); margin-bottom: 4px; line-height: 1.3; transition: color 0.25s; }
+.sp-role { font-family: 'Inter', sans-serif; font-size: 11px; color: var(--verde); font-weight: 600; margin-bottom: 2px; transition: color 0.25s; }
+.sp-inst { font-family: 'Inter', sans-serif; font-size: 11px; color: var(--gris); margin-bottom: 14px; transition: color 0.25s; }
+.sp-expand { font-family: 'Inter', sans-serif; font-size: 10px; color: var(--verde); text-transform: uppercase; letter-spacing: 1px; font-weight: 700; transition: color 0.25s; }
 
-/* Modal ponente */
+/* Modal */
 .modal-overlay {
   position: fixed; inset: 0; z-index: 200;
-  background: rgba(29,16,6,0.85); backdrop-filter: blur(4px);
+  background: rgba(2,42,82,0.85); backdrop-filter: blur(4px);
   display: none; align-items: center; justify-content: center;
   padding: 20px;
 }
 .modal-overlay.open { display: flex; }
 .modal-box {
-  background: var(--blanco); max-width: 600px; width: 100%;
-  border-radius: 4px; overflow: hidden;
+  background: #fff; max-width: 600px; width: 100%;
+  border-radius: 10px; overflow: hidden;
   max-height: 90vh; overflow-y: auto;
+  position: relative;
 }
 .modal-header {
-  background: var(--tierra); padding: 32px 36px;
+  background: linear-gradient(135deg, var(--azul-prof), var(--azul));
+  padding: 32px 36px;
   display: flex; gap: 20px; align-items: flex-start;
 }
 .modal-avatar {
@@ -498,101 +487,79 @@ section { padding: 100px 0; }
   display: flex; align-items: center; justify-content: center;
   font-family: 'Playfair Display', serif;
   font-size: 22px; font-weight: 700;
-  color: var(--blanco); flex-shrink: 0;
+  color: #fff; flex-shrink: 0;
+  border: 2px solid var(--dorado);
 }
-.modal-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 22px; color: var(--dorado);
-  margin-bottom: 4px;
-}
-.modal-role { font-size: 14px; color: rgba(245,237,216,0.8); font-weight: 300; }
-.modal-body { padding: 32px 36px; }
+.modal-name { font-family: 'Playfair Display', serif; font-size: 22px; color: var(--dorado); margin-bottom: 4px; }
+.modal-role { font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 300; }
+.modal-body { padding: 30px 36px; }
 .modal-body h4 {
   font-family: 'Inter', sans-serif;
   font-size: 10px; font-weight: 700;
   letter-spacing: 2px; text-transform: uppercase;
-  color: var(--arcilla); margin-bottom: 12px;
+  color: var(--verde); margin-bottom: 12px;
 }
 .modal-body p { font-size: 15px; line-height: 1.7; color: var(--gris); margin-bottom: 24px; }
 .modal-close {
-  position: absolute; top: 20px; right: 20px;
-  background: none; border: none; color: var(--crema);
-  font-size: 24px; cursor: pointer; line-height: 1;
+  position: absolute; top: 18px; right: 18px;
+  background: rgba(255,255,255,0.15); border: none; color: #fff;
+  font-size: 18px; cursor: pointer; line-height: 1;
+  width: 32px; height: 32px; border-radius: 50%;
+  z-index: 2;
 }
 .modal-tags { display: flex; flex-wrap: wrap; gap: 8px; }
 .modal-tag {
   font-family: 'Inter', sans-serif;
   font-size: 10px; font-weight: 600;
   letter-spacing: 1px; text-transform: uppercase;
-  padding: 4px 12px; border-radius: 2px;
-  background: var(--pergamino); color: var(--corteza);
+  padding: 5px 12px; border-radius: 14px;
+  background: var(--celeste); color: var(--azul);
 }
 
 /* ─── PANELES ─── */
-#paneles { background: var(--tierra); color: var(--crema); }
+#paneles { background: linear-gradient(160deg, var(--azul-prof), var(--azul)); color: #fff; }
 #paneles .section-tag { color: var(--dorado); }
 #paneles .section-tag::after { background: var(--dorado); }
 #paneles .section-title { color: var(--dorado); }
-#paneles .section-lead { color: rgba(245,237,216,0.7); }
-.paneles-accordion { display: flex; flex-direction: column; gap: 2px; }
+#paneles .section-lead { color: rgba(255,255,255,0.75); }
+.paneles-accordion { display: flex; flex-direction: column; gap: 12px; }
 .panel-item {
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(212,160,23,0.12);
-  border-radius: 2px; overflow: hidden;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(244,183,46,0.18);
+  border-radius: 8px; overflow: hidden;
   cursor: pointer;
 }
 .panel-header {
-  display: grid; grid-template-columns: 60px 1fr auto;
-  align-items: center; gap: 20px;
-  padding: 24px 28px;
+  display: grid; grid-template-columns: 56px 1fr auto;
+  align-items: center; gap: 18px;
+  padding: 22px 26px;
   transition: background 0.2s;
 }
-.panel-header:hover { background: rgba(255,255,255,0.04); }
+.panel-header:hover { background: rgba(255,255,255,0.05); }
 .panel-num {
   font-family: 'Playfair Display', serif;
-  font-size: 36px; font-weight: 900;
-  color: rgba(212,160,23,0.3); line-height: 1;
+  font-size: 34px; font-weight: 900;
+  color: rgba(244,183,46,0.4); line-height: 1;
 }
-.panel-head-title {
-  font-family: 'Source Serif 4', serif;
-  font-size: 18px; font-weight: 600; color: var(--dorado);
-  margin-bottom: 4px;
-}
-.panel-head-sub {
-  font-size: 13px; color: rgba(245,237,216,0.5);
-  font-weight: 300;
-}
-.panel-arrow {
-  font-size: 20px; color: var(--dorado); opacity: 0.6;
-  transition: transform 0.3s;
-}
+.panel-head-title { font-size: 18px; font-weight: 600; color: var(--dorado); margin-bottom: 4px; }
+.panel-head-sub { font-size: 13px; color: rgba(255,255,255,0.6); font-weight: 300; }
+.panel-arrow { font-size: 20px; color: var(--dorado); opacity: 0.7; transition: transform 0.3s; }
 .panel-item.open .panel-arrow { transform: rotate(180deg); }
-.panel-body {
-  display: none; padding: 0 28px 28px;
-  border-top: 1px solid rgba(212,160,23,0.1);
-}
+.panel-body { display: none; padding: 0 26px 26px; border-top: 1px solid rgba(244,183,46,0.12); }
 .panel-item.open .panel-body { display: block; }
-.panel-meta {
-  display: flex; gap: 24px; flex-wrap: wrap;
-  padding: 20px 0; margin-bottom: 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.panel-meta-item { }
+.panel-meta { display: flex; gap: 24px; flex-wrap: wrap; padding: 20px 0; margin-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.08); }
 .panel-meta-label {
   font-family: 'Inter', sans-serif;
   font-size: 9px; font-weight: 700;
   letter-spacing: 2px; text-transform: uppercase;
   color: var(--dorado); display: block; margin-bottom: 4px;
 }
-.panel-meta-val { font-size: 13px; color: rgba(245,237,216,0.8); }
-.panel-speakers-list { display: flex; flex-direction: column; gap: 12px; }
+.panel-meta-val { font-size: 13px; color: rgba(255,255,255,0.85); }
+.panel-speakers-list { display: flex; flex-direction: column; gap: 11px; }
 .ps-item { display: flex; gap: 12px; align-items: flex-start; }
-.ps-dot {
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--dorado); flex-shrink: 0; margin-top: 6px;
-}
-.ps-name { font-size: 14px; font-weight: 600; color: var(--crema); }
-.ps-info { font-size: 12px; color: rgba(245,237,216,0.5); margin-top: 2px; font-family: 'Inter', sans-serif; }
+.ps-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--dorado); flex-shrink: 0; margin-top: 6px; }
+.ps-name { font-size: 14px; font-weight: 600; color: #fff; }
+.ps-info { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; font-family: 'Inter', sans-serif; }
 .panel-temas { margin-top: 20px; }
 .panel-temas h4 {
   font-family: 'Inter', sans-serif;
@@ -601,202 +568,453 @@ section { padding: 100px 0; }
   color: var(--dorado); margin-bottom: 12px;
 }
 .tema-pill {
-  display: inline-block; margin: 4px;
+  display: inline-block; margin: 4px 4px 4px 0;
   font-family: 'Inter', sans-serif; font-size: 11px;
-  padding: 6px 14px; border-radius: 2px;
-  background: rgba(212,160,23,0.08);
-  border: 1px solid rgba(212,160,23,0.15);
-  color: rgba(245,237,216,0.7);
+  padding: 6px 14px; border-radius: 14px;
+  background: rgba(244,183,46,0.1);
+  border: 1px solid rgba(244,183,46,0.2);
+  color: rgba(255,255,255,0.78);
 }
+.pregunta-box { margin-top: 20px; padding: 16px 18px; background: rgba(244,183,46,0.08); border-radius: 6px; border-left: 3px solid var(--dorado); }
+.pregunta-box span {
+  font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--dorado); display: block; margin-bottom: 8px;
+}
+.pregunta-box p { font-size: 14px; font-style: italic; color: rgba(255,255,255,0.78); }
 
-/* ─── WORKSHOP ─── */
-#workshop { background: var(--pergamino); }
-.workshop-intro {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
-  margin-bottom: 60px;
-}
+/* ─── WORKSHOP / DOCUMENTOS ─── */
+#workshop { background: var(--menta); }
+.workshop-intro { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; margin-bottom: 52px; }
 .workshop-text p { font-size: 15px; line-height: 1.8; color: var(--gris); margin-bottom: 16px; }
-.concl-cards { display: flex; flex-direction: column; gap: 16px; }
+.concl-cards { display: flex; flex-direction: column; gap: 14px; }
 .concl-card {
-  background: var(--blanco); border-radius: 4px;
+  background: #fff; border-radius: 8px;
   padding: 20px 24px;
-  border-left: 3px solid var(--arcilla);
+  border-left: 4px solid var(--verde);
 }
-.concl-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px; font-weight: 900; color: var(--ocre);
-  margin-bottom: 4px; line-height: 1;
-}
-.concl-title {
-  font-family: 'Source Serif 4', serif;
-  font-size: 15px; font-weight: 600; color: var(--tierra);
-  margin-bottom: 8px;
-}
+.concl-num { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 900; color: var(--verde-claro); margin-bottom: 4px; line-height: 1; }
+.concl-title { font-size: 15px; font-weight: 600; color: var(--azul); margin-bottom: 8px; }
 .concl-desc { font-size: 13px; color: var(--gris); line-height: 1.6; }
 
-.tres-paises {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
-  margin-top: 48px;
-}
-.pais-bloque { background: var(--blanco); padding: 32px; }
-.pais-flag { font-size: 32px; margin-bottom: 12px; display: block; }
-.pais-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 20px; font-weight: 700; color: var(--tierra);
-  margin-bottom: 16px;
-}
+.tres-paises { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 44px; }
+.pais-bloque { background: #fff; padding: 30px; border-radius: 8px; border-top: 4px solid var(--azul); }
+.pais-bloque:nth-child(2) { border-top-color: var(--verde); }
+.pais-bloque:nth-child(3) { border-top-color: #0A5C8C; }
+.pais-flag { font-size: 30px; margin-bottom: 12px; display: block; }
+.pais-name { font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700; color: var(--azul); margin-bottom: 16px; }
 .pais-list { list-style: none; }
 .pais-list li {
   font-size: 13px; color: var(--gris);
-  padding: 8px 0; border-top: 1px solid rgba(160,82,45,0.1);
+  padding: 8px 0; border-top: 1px solid var(--celeste);
   display: flex; gap: 8px; align-items: flex-start;
 }
-.pais-list li::before { content: '→'; color: var(--arcilla); flex-shrink: 0; font-family: 'Inter', sans-serif; }
+.pais-list li::before { content: '→'; color: var(--verde); flex-shrink: 0; font-family: 'Inter', sans-serif; }
+
+/* Documentos */
+.docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin-top: 44px; }
+.doc-card {
+  background: #fff; border-radius: 8px;
+  padding: 28px; display: flex; gap: 18px; align-items: flex-start;
+  border: 1px solid rgba(0,74,147,0.1);
+  text-decoration: none;
+  transition: all 0.2s;
+}
+.doc-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,74,147,0.15); border-color: var(--dorado); }
+.doc-icon {
+  width: 48px; height: 48px; border-radius: 8px;
+  background: var(--azul); color: var(--dorado);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.doc-title { font-size: 15px; font-weight: 600; color: var(--azul); margin-bottom: 6px; line-height: 1.35; }
+.doc-desc { font-family: 'Inter', sans-serif; font-size: 12px; color: var(--gris); line-height: 1.5; margin-bottom: 10px; }
+.doc-cta { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--verde); }
 
 /* ─── LUGAR ─── */
 #lugar { background: var(--blanco); }
-.lugar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: start; }
-.lugar-info { }
-.lugar-info h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 28px; color: var(--tierra); margin-bottom: 8px;
-}
-.lugar-info .subtitulo { font-size: 15px; color: var(--gris); margin-bottom: 32px; font-style: italic; }
-.lugar-details { display: flex; flex-direction: column; gap: 20px; }
+.lugar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+.lugar-info h3 { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--azul); margin-bottom: 8px; }
+.lugar-info .subtitulo { font-size: 15px; color: var(--gris); margin-bottom: 30px; font-style: italic; }
+.lugar-details { display: flex; flex-direction: column; gap: 18px; }
 .lugar-detail { display: flex; gap: 16px; }
 .lugar-detail-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
 .lugar-detail-label {
   font-family: 'Inter', sans-serif;
   font-size: 10px; font-weight: 700;
   letter-spacing: 2px; text-transform: uppercase;
-  color: var(--arcilla); display: block; margin-bottom: 4px;
+  color: var(--verde); display: block; margin-bottom: 4px;
 }
 .lugar-detail-val { font-size: 15px; color: var(--texto); }
 .lugar-map {
-  background: var(--pergamino);
-  border-radius: 4px; overflow: hidden;
+  background: var(--celeste);
+  border-radius: 10px; overflow: hidden;
   height: 320px;
   display: flex; align-items: center; justify-content: center;
-  flex-direction: column; gap: 16px;
-  border: 1px solid rgba(160,82,45,0.15);
+  border: 1px solid rgba(0,74,147,0.12);
 }
-.map-placeholder {
-  text-align: center;
-}
-.map-placeholder .map-icon { font-size: 48px; margin-bottom: 12px; display: block; }
+.map-placeholder { text-align: center; }
+.map-placeholder .map-icon { font-size: 46px; margin-bottom: 12px; display: block; }
 .map-placeholder p { font-size: 14px; color: var(--gris); margin-bottom: 16px; }
 .map-link {
   font-family: 'Inter', sans-serif;
   font-size: 12px; font-weight: 600;
   letter-spacing: 1px; text-transform: uppercase;
-  background: var(--tierra); color: var(--dorado);
-  padding: 10px 24px; border-radius: 2px;
+  background: var(--azul); color: var(--dorado);
+  padding: 10px 24px; border-radius: 4px;
   text-decoration: none;
 }
-
-/* ─── ORGANIZA ─── */
-#organiza { background: var(--tierra); color: var(--crema); padding: 80px 0; }
-#organiza .section-tag { color: var(--dorado); }
-#organiza .section-tag::after { background: var(--dorado); }
-#organiza .section-title { color: var(--crema); }
-.org-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px; }
-.org-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(212,160,23,0.1);
-  padding: 32px;
+/* Transporte + parqueaderos */
+.llegar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 36px; }
+.llegar-card {
+  background: var(--menta); border-radius: 10px;
+  padding: 28px 30px; border-top: 4px solid var(--verde);
 }
-.org-label {
+.llegar-card:nth-child(2) { border-top-color: var(--dorado); background: #FEF8E8; }
+.llegar-head {
+  font-family: 'Playfair Display', serif;
+  font-size: 19px; font-weight: 700; color: var(--azul);
+  margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+}
+.llegar-ico { font-size: 24px; }
+.llegar-sub { font-size: 14px; color: var(--gris); line-height: 1.6; margin-bottom: 16px; }
+.rutas-label {
   font-family: 'Inter', sans-serif;
-  font-size: 9px; font-weight: 700;
-  letter-spacing: 2px; text-transform: uppercase;
-  color: var(--dorado); margin-bottom: 8px; display: block;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--verde); margin-bottom: 10px;
 }
-.org-name {
-  font-family: 'Source Serif 4', serif;
-  font-size: 18px; font-weight: 600; color: var(--crema);
-  margin-bottom: 4px;
+.rutas-wrap { display: flex; flex-wrap: wrap; gap: 7px; }
+.ruta-pill {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; font-weight: 600;
+  background: var(--azul); color: #fff;
+  padding: 5px 12px; border-radius: 6px;
+  min-width: 34px; text-align: center;
 }
-.org-sub { font-size: 13px; color: rgba(245,237,216,0.5); }
+.park-list { list-style: none; margin-bottom: 16px; }
+.park-list li {
+  font-size: 13px; color: var(--gris);
+  padding: 9px 0; border-top: 1px solid rgba(244,183,46,0.3);
+  display: flex; gap: 8px; align-items: flex-start; line-height: 1.5;
+}
+.park-list li::before { content: '🅿️'; font-size: 12px; flex-shrink: 0; }
+.park-link {
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; font-weight: 600;
+  color: var(--azul); text-decoration: none;
+  border-bottom: 1px solid var(--dorado); padding-bottom: 2px;
+}
+.btn-maps {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; font-weight: 600;
+  letter-spacing: 0.5px;
+  background: var(--azul); color: #fff;
+  padding: 14px 32px; border-radius: 6px;
+  text-decoration: none; display: inline-block;
+  transition: all 0.2s;
+}
+.btn-maps:hover { background: var(--azul-prof); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,74,147,0.25); }
 
 /* ─── FOOTER ─── */
 footer {
-  background: #0D0805; padding: 40px 60px;
+  background: var(--azul-prof); padding: 40px 60px;
   display: flex; align-items: center; justify-content: space-between;
   flex-wrap: wrap; gap: 20px;
+  border-top: 3px solid var(--dorado);
 }
-.footer-logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 14px; color: var(--dorado);
-}
-.footer-logo span { color: rgba(255,255,255,0.3); }
-.footer-tagline {
-  font-family: 'Source Serif 4', serif;
-  font-size: 13px; font-style: italic;
-  color: rgba(255,255,255,0.3);
-}
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 14px; color: var(--dorado); }
+.footer-logo span { color: rgba(255,255,255,0.4); }
+.footer-tagline { font-size: 13px; font-style: italic; color: rgba(255,255,255,0.45); }
 
 /* ─── RESPONSIVE ─── */
 @media (max-width: 900px) {
-  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
-  .hero-emblem { flex-direction: row; flex-wrap: wrap; }
-  .andean-grid, .salas-grid, .tres-paises, .org-grid { grid-template-columns: 1fr; }
-  .workshop-intro, .lugar-grid { grid-template-columns: 1fr; }
-  nav { padding: 0 20px; }
-  .nav-links { display: none; }
-  .container { padding: 0 24px; }
-  section { padding: 70px 0; }
-  footer { padding: 32px 24px; }
+  /* En móvil: emblema/logo primero pero pequeño, luego info clave rápido */
+  .hero-inner { grid-template-columns: 1fr; gap: 24px; padding: 32px 22px; display: flex; flex-direction: column; }
+  .hero-text { order: 1; }
+  .hero-emblem { order: 2; }
+  #hero { min-height: auto; padding-bottom: 30px; }
+  .emblem-circle { width: 150px; height: 150px; }
+  .emblem-logo { width: 92px; }
+  .hero-emblem { gap: 16px; }
+  .hero-title { font-size: 40px; }
+  .hero-subtitle { margin-bottom: 24px; font-size: 16px; }
+  .hero-tagline { margin-bottom: 24px; }
+  .dato-item { padding: 10px 13px; }
+  .live-strip { margin-top: 22px; }
+  .andean-grid, .salas-grid, .tres-paises { grid-template-columns: 1fr; }
+  .workshop-intro, .lugar-grid, .llegar-grid { grid-template-columns: 1fr; gap: 28px; }
+  .pregunta-publico { grid-template-columns: 1fr; gap: 22px; padding: 26px; }
+  nav { padding: 0 18px; }
+  .nav-links, .nav-cta { display: none; }
+  .nav-burger { display: flex; }
+  .container { padding: 0 20px; }
+  section { padding: 48px 0; }
+  .section-lead { margin-bottom: 36px; font-size: 16px; }
+  footer { padding: 28px 20px; }
+  .timeline::before { left: 58px; }
+  .t-item { grid-template-columns: 58px 1fr; }
+  .t-time { padding-right: 12px; font-size: 10px; }
+  .t-content { padding: 13px 14px; }
+  .org-divider { display: none; }
+  .org-row { gap: 24px; }
+  .org-block-label { margin-bottom: 10px; }
+  .country-flag { font-size: 38px; }
+  .country-name { font-size: 23px; }
+  .lugar-map { height: 260px; }
 }
 
-/* ─── ANIMACIONES ─── */
 @keyframes fadeUp {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
 }
 .fade-up { opacity: 0; }
 .fade-up.visible { animation: fadeUp 0.6s ease forwards; }
+
+/* ─── CONTADOR + PROGRESO EN VIVO (widget unificado, sutil) ─── */
+.live-strip {
+  margin-top: 36px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(244,183,46,0.25);
+  border-radius: 6px;
+  padding: 14px 18px;
+  max-width: 480px;
+}
+.live-strip-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--dorado); margin-bottom: 8px;
+  display: flex; align-items: center; gap: 8px;
+}
+.live-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--verde-claro);
+  animation: pulse 2s infinite;
+  display: none;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.3); }
+}
+.countdown-row { display: flex; gap: 18px; }
+.cd-unit { text-align: center; }
+.cd-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 900;
+  color: #fff; line-height: 1;
+}
+.cd-lab {
+  font-family: 'Inter', sans-serif;
+  font-size: 9px; letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.55);
+  margin-top: 3px;
+}
+.progress-row { display: none; }
+.progress-now {
+  font-size: 14px; font-weight: 600; color: #fff;
+  margin-bottom: 8px;
+}
+.progress-track {
+  height: 5px; border-radius: 3px;
+  background: rgba(255,255,255,0.15);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--verde-claro), var(--dorado));
+  border-radius: 3px;
+  transition: width 1s ease;
+}
+.progress-next {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px; color: rgba(255,255,255,0.6);
+  margin-top: 7px;
+}
+
+/* ─── ¿QUÉ ES UN JUEZ DE PAZ? ─── */
+#quees { background: var(--blanco); }
+.quees-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.quees-card {
+  background: var(--celeste);
+  border-radius: 10px; padding: 30px 26px;
+  border-top: 4px solid var(--azul);
+  transition: transform 0.2s;
+}
+.quees-card:hover { transform: translateY(-4px); }
+.quees-card:nth-child(2) { border-top-color: var(--verde); background: var(--menta); }
+.quees-card:nth-child(3) { border-top-color: var(--dorado); background: #FEF8E8; }
+.quees-card:nth-child(4) { border-top-color: #C0392B; background: #FDF0EE; }
+.quees-icon { font-size: 34px; margin-bottom: 14px; display: block; }
+.quees-q {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--azul); margin-bottom: 12px; line-height: 1.3;
+}
+.quees-a { font-size: 14px; color: var(--gris); line-height: 1.65; }
+.quees-a strong { color: var(--texto); }
+
+/* ─── GLOSARIO (tooltips) ─── */
+.glos {
+  border-bottom: 2px dotted var(--verde);
+  cursor: help; position: relative;
+  font-weight: 600; color: var(--verde);
+}
+.glos::after {
+  content: attr(data-def);
+  position: absolute; bottom: calc(100% + 8px); left: 50%;
+  transform: translateX(-50%);
+  background: var(--azul-prof); color: #fff;
+  font-family: 'Inter', sans-serif;
+  font-size: 12px; font-weight: 400; line-height: 1.5;
+  padding: 10px 14px; border-radius: 6px;
+  width: max-content; max-width: 260px;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.2s;
+  z-index: 50;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+}
+.glos::before {
+  content: '';
+  position: absolute; bottom: calc(100% + 2px); left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: var(--azul-prof);
+  opacity: 0; transition: opacity 0.2s;
+  z-index: 50;
+}
+.glos:hover::after, .glos:hover::before,
+.glos.tapped::after, .glos.tapped::before { opacity: 1; }
+
+/* ─── FAQ ─── */
+#faq { background: var(--celeste); }
+.faq-list { max-width: 760px; display: flex; flex-direction: column; gap: 10px; }
+.faq-item {
+  background: #fff; border-radius: 8px;
+  border: 1px solid rgba(0,74,147,0.1);
+  overflow: hidden; cursor: pointer;
+}
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px; padding: 20px 24px;
+  font-size: 16px; font-weight: 600; color: var(--azul);
+  transition: background 0.2s;
+}
+.faq-q:hover { background: var(--celeste); }
+.faq-arrow { font-size: 16px; color: var(--verde); transition: transform 0.3s; flex-shrink: 0; }
+.faq-item.open .faq-arrow { transform: rotate(180deg); }
+.faq-a {
+  display: none; padding: 0 24px 22px;
+  font-size: 14px; color: var(--gris); line-height: 1.7;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* ─── CAJA DE PREGUNTAS DEL PÚBLICO ─── */
+.pregunta-publico {
+  margin-top: 40px;
+  background: #fff;
+  border: 1px solid rgba(0,74,147,0.12);
+  border-radius: 12px;
+  padding: 36px;
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px;
+  align-items: center;
+  box-shadow: 0 6px 24px rgba(0,74,147,0.07);
+}
+.pp-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px; font-weight: 700; color: var(--azul);
+  margin-bottom: 12px;
+}
+.pp-text { font-size: 15px; color: var(--gris); line-height: 1.7; }
+.pp-form { display: flex; flex-direction: column; gap: 12px; }
+.pp-input {
+  font-family: 'Source Serif 4', serif;
+  font-size: 15px;
+  padding: 13px 16px;
+  border: 1px solid rgba(0,74,147,0.2);
+  border-radius: 8px;
+  background: var(--celeste);
+  color: var(--texto);
+  width: 100%;
+  transition: border 0.2s, background 0.2s;
+}
+.pp-input:focus { outline: none; border-color: var(--azul); background: #fff; }
+.pp-input::placeholder { color: #8FA3B8; }
+.pp-textarea { resize: vertical; min-height: 100px; }
+.pp-btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px; font-weight: 600; letter-spacing: 0.5px;
+  background: var(--azul); color: #fff;
+  padding: 14px 24px; border: none; border-radius: 8px;
+  cursor: pointer; transition: all 0.2s;
+}
+.pp-btn:hover { background: var(--azul-prof); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,74,147,0.25); }
+.pp-aviso {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px; color: var(--verde); font-weight: 500;
+  min-height: 18px; text-align: center;
+}
+
+@media (max-width: 900px) {
+  .quees-grid { grid-template-columns: 1fr 1fr; }
+  .live-strip { max-width: 100%; }
+  .countdown-row { justify-content: space-between; }
+}
+@media (max-width: 540px) {
+  .quees-grid { grid-template-columns: 1fr; }
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">Raíz de Paz <span>· Congreso 2026</span></a>
+  <a href="#" class="nav-logo">Raíz de Paz <span>· 2026</span></a>
   <ul class="nav-links">
-    <li><a href="#contexto">Contexto</a></li>
+    <li><a href="#quees">Qué es</a></li>
     <li><a href="#agenda">Agenda</a></li>
     <li><a href="#ponentes">Ponentes</a></li>
     <li><a href="#paneles">Paneles</a></li>
     <li><a href="#workshop">Workshop</a></li>
-    <li><a href="#lugar">Lugar</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#lugar">Sede</a></li>
   </ul>
   <a href="#agenda" class="nav-cta">Ver agenda</a>
+  <button class="nav-burger" id="burger" onclick="toggleMenu()" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#quees" onclick="closeMenu()">¿Qué es un juez de paz?</a>
+  <a href="#contexto" onclick="closeMenu()">Contexto andino</a>
+  <a href="#agenda" onclick="closeMenu()">Agenda · 8 de julio</a>
+  <a href="#ponentes" onclick="closeMenu()">Ponentes</a>
+  <a href="#paneles" onclick="closeMenu()">Paneles</a>
+  <a href="#workshop" onclick="closeMenu()">Workshop y documentos</a>
+  <a href="#faq" onclick="closeMenu()">Preguntas frecuentes</a>
+  <a href="#lugar" onclick="closeMenu()">Sede</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
-  <svg class="hero-roots" viewBox="0 0 1440 280" preserveAspectRatio="none" fill="none">
-    <path d="M0 280 Q180 200 360 240 Q540 280 720 220 Q900 160 1080 200 Q1260 240 1440 180 L1440 280Z" fill="#6B3A1F" opacity="0.4"/>
-    <path d="M0 280 Q120 240 240 260 Q480 300 600 240 Q800 180 960 220 Q1100 250 1440 200 L1440 280Z" fill="#3D2314" opacity="0.6"/>
-    <!-- raíces -->
-    <line x1="360" y1="240" x2="340" y2="280" stroke="#D4A017" stroke-width="1.5" opacity="0.3"/>
-    <line x1="340" y1="260" x2="310" y2="280" stroke="#D4A017" stroke-width="1" opacity="0.2"/>
-    <line x1="720" y1="220" x2="700" y2="280" stroke="#D4A017" stroke-width="1.5" opacity="0.3"/>
-    <line x1="700" y1="250" x2="670" y2="280" stroke="#D4A017" stroke-width="1" opacity="0.2"/>
-    <line x1="1080" y1="200" x2="1060" y2="280" stroke="#D4A017" stroke-width="1.5" opacity="0.3"/>
-    <line x1="1060" y1="240" x2="1040" y2="280" stroke="#D4A017" stroke-width="1" opacity="0.2"/>
-    <!-- paloma sutil -->
-    <path d="M680 140 Q700 120 730 130 Q750 140 740 160 Q720 170 700 160Z" fill="#D4A017" opacity="0.08"/>
+  <svg class="hero-roots" viewBox="0 0 1440 240" preserveAspectRatio="none" fill="none">
+    <path d="M0 240 Q180 170 360 205 Q540 240 720 188 Q900 136 1080 172 Q1260 205 1440 155 L1440 240Z" fill="#2D6A4F" opacity="0.5"/>
+    <path d="M0 240 Q120 205 240 222 Q480 258 600 205 Q800 155 960 188 Q1100 215 1440 172 L1440 240Z" fill="#00336B" opacity="0.7"/>
+    <line x1="360" y1="205" x2="340" y2="240" stroke="#F4B72E" stroke-width="1.5" opacity="0.4"/>
+    <line x1="720" y1="188" x2="700" y2="240" stroke="#F4B72E" stroke-width="1.5" opacity="0.4"/>
+    <line x1="1080" y1="172" x2="1060" y2="240" stroke="#F4B72E" stroke-width="1.5" opacity="0.4"/>
   </svg>
 
   <div class="hero-inner">
     <div class="hero-text">
-      <p class="hero-eyebrow">Personería de Bogotá · Julio 2026</p>
+      <p class="hero-eyebrow">Organiza: Personería de Bogotá D.C.</p>
       <h1 class="hero-title">
         Congreso<br>
         <em>Raíz de Paz</em>
       </h1>
-      <p class="hero-subtitle">Jueces de Paz — Diálogo Internacional Andino</p>
+      <p class="hero-subtitle">Jueces de Paz — Diálogo Internacional Andino · Colombia · Ecuador · Perú</p>
       <blockquote class="hero-tagline">
         "De las raíces más profundas nace la paz verdadera"
       </blockquote>
@@ -804,36 +1022,36 @@ footer {
         <a href="#agenda" class="btn-primary">Explorar agenda</a>
         <a href="#ponentes" class="btn-outline">Ver ponentes</a>
       </div>
+
+      <!-- Widget unificado: contador antes del evento → progreso en vivo el 8 de julio -->
+      <div class="live-strip" id="liveStrip">
+        <div class="live-strip-label">
+          <span class="live-dot" id="liveDot"></span>
+          <span id="liveLabel">Faltan para el congreso</span>
+        </div>
+        <div class="countdown-row" id="countdownRow">
+          <div class="cd-unit"><div class="cd-num" id="cdD">–</div><div class="cd-lab">días</div></div>
+          <div class="cd-unit"><div class="cd-num" id="cdH">–</div><div class="cd-lab">horas</div></div>
+          <div class="cd-unit"><div class="cd-num" id="cdM">–</div><div class="cd-lab">min</div></div>
+          <div class="cd-unit"><div class="cd-num" id="cdS">–</div><div class="cd-lab">seg</div></div>
+        </div>
+        <div class="progress-row" id="progressRow">
+          <div class="progress-now" id="progressNow"></div>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+          <div class="progress-next" id="progressNext"></div>
+        </div>
+      </div>
     </div>
 
     <div class="hero-emblem">
-      <!-- Emblema SVG paloma con raíces -->
       <div class="emblem-circle">
-        <svg class="emblem-svg" viewBox="0 0 160 160" fill="none">
-          <!-- raíces -->
-          <path d="M80 120 L80 155" stroke="#D4A017" stroke-width="2" stroke-linecap="round"/>
-          <path d="M80 135 L60 155" stroke="#D4A017" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-          <path d="M80 145 L100 160" stroke="#D4A017" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
-          <path d="M70 140 L50 158" stroke="#D4A017" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
-          <path d="M90 143 L115 160" stroke="#D4A017" stroke-width="1" stroke-linecap="round" opacity="0.4"/>
-          <!-- tronco -->
-          <path d="M80 120 L80 90" stroke="#A0522D" stroke-width="3" stroke-linecap="round"/>
-          <!-- paloma -->
-          <path d="M80 90 Q60 75 45 80 Q55 65 75 70 Q80 60 90 58 Q105 55 115 65 Q125 75 115 85 Q100 90 80 90Z" fill="#D4A017" opacity="0.9"/>
-          <path d="M80 90 Q90 80 110 75 Q120 70 115 85Z" fill="#C8873A" opacity="0.8"/>
-          <!-- ala -->
-          <path d="M80 78 Q65 68 50 72 Q60 60 78 68Z" fill="#D4A017" opacity="0.6"/>
-          <!-- ojo -->
-          <circle cx="95" cy="68" r="3" fill="#3D2314"/>
-          <circle cx="96" cy="67" r="1" fill="#D4A017"/>
-          <!-- pico -->
-          <path d="M115 65 L125 68 L115 71Z" fill="#C8873A"/>
-          <!-- rama de olivo -->
-          <path d="M100 85 Q115 95 125 90" stroke="#4A6741" stroke-width="2" fill="none" stroke-linecap="round"/>
-          <ellipse cx="110" cy="92" rx="5" ry="3" fill="#4A6741" transform="rotate(-20 110 92)"/>
-          <ellipse cx="119" cy="89" rx="4" ry="2.5" fill="#6B8C42" transform="rotate(-35 119 89)"/>
-          <!-- círculo decorativo -->
-          <circle cx="80" cy="80" r="50" stroke="#D4A017" stroke-width="0.5" opacity="0.3" stroke-dasharray="4 4"/>
+        <img src="assets/raiz_dove_white.png" alt="Logo Congreso Raíz de Paz" class="emblem-logo"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+        <svg class="emblem-svg" viewBox="0 0 160 160" fill="none" style="display:none">
+          <path d="M80 120 L80 155" stroke="#F4B72E" stroke-width="2" stroke-linecap="round"/>
+          <path d="M80 120 L80 90" stroke="#52B788" stroke-width="3" stroke-linecap="round"/>
+          <path d="M80 90 Q60 75 45 80 Q55 65 75 70 Q80 60 90 58 Q105 55 115 65 Q125 75 115 85 Q100 90 80 90Z" fill="#F4B72E" opacity="0.95"/>
+          <circle cx="95" cy="68" r="3" fill="#022A52"/>
         </svg>
       </div>
 
@@ -841,8 +1059,8 @@ footer {
         <div class="dato-item">
           <span class="dato-icon">📅</span>
           <div>
-            <span class="dato-label">Fecha — Día público</span>
-            <span class="dato-val">8 de julio de 2026</span>
+            <span class="dato-label">Fecha</span>
+            <span class="dato-val">Miércoles 8 de julio de 2026</span>
           </div>
         </div>
         <div class="dato-item">
@@ -862,10 +1080,77 @@ footer {
         <div class="dato-item">
           <span class="dato-icon">👥</span>
           <div>
-            <span class="dato-label">Modalidad</span>
+            <span class="dato-label">Acceso</span>
             <span class="dato-val">Jornada abierta al público</span>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ORGANIZA · LOGOS -->
+<section id="organiza-hero" style="padding:36px 0;">
+  <div class="container">
+    <div class="org-row">
+      <div class="org-block">
+        <span class="org-block-label">Organiza</span>
+        <div class="logos-strip">
+          <div class="logo-chip principal">
+            <img src="assets/logo_personeria.png" alt="Personería de Bogotá D.C." onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="logo-fallback">Personería de<br>Bogotá D.C.</span>
+          </div>
+        </div>
+      </div>
+      <div class="org-divider"></div>
+      <div class="org-block">
+        <span class="org-block-label">Con el apoyo de</span>
+        <div class="logos-strip">
+          <div class="logo-chip dark">
+            <img src="assets/logo_dnp.png" alt="Departamento Nacional de Planeación" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="logo-fallback">DNP</span>
+          </div>
+          <div class="logo-chip dark">
+            <img src="assets/logo_justicia.png" alt="Ministerio de Justicia y del Derecho" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="logo-fallback">Ministerio de Justicia<br>y del Derecho</span>
+          </div>
+          <div class="logo-chip">
+            <img src="assets/logo_usta.png" alt="Universidad Santo Tomás" onerror="this.style.display='none';this.nextElementSibling.style.display='block'">
+            <span class="logo-fallback">Universidad<br>Santo Tomás</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ¿QUÉ ES UN JUEZ DE PAZ? -->
+<section id="quees">
+  <div class="container">
+    <p class="section-tag fade-up">Para empezar</p>
+    <h2 class="section-title fade-up">¿Qué es un juez de paz? — en 60 segundos</h2>
+    <p class="section-lead fade-up">Si nunca has oído hablar de la figura, esto es todo lo que necesitas saber antes del congreso. Pasa el cursor (o toca) las palabras <span class="glos" data-def="Así se ven los términos del glosario: toca o pasa el cursor para ver la definición.">subrayadas</span> para ver su significado.</p>
+
+    <div class="quees-grid fade-up">
+      <div class="quees-card">
+        <span class="quees-icon">🕊️</span>
+        <div class="quees-q">¿Qué hace?</div>
+        <div class="quees-a">Resuelve <strong>conflictos cotidianos de la comunidad</strong> — deudas, linderos, convivencia entre vecinos — a través del diálogo y la <span class="glos" data-def="Acuerdo voluntario entre las partes para resolver el conflicto, facilitado por el juez de paz. Tiene plenos efectos legales.">conciliación</span>. Decide en <span class="glos" data-def="Decidir según el sentido común de justicia de la comunidad, no según las normas escritas del derecho formal.">equidad</span>, no con códigos: busca la solución más justa para ambas partes.</div>
+      </div>
+      <div class="quees-card">
+        <span class="quees-icon">🗳️</span>
+        <div class="quees-q">¿Quién puede ser?</div>
+        <div class="quees-a">Cualquier <strong>ciudadano mayor de edad</strong> con al menos un año de residencia en su comunidad. <strong>No se requiere ser abogado</strong> ni tener título profesional. Es elegido por <strong>votación popular</strong> para un período de 5 años y ejerce de forma gratuita.</div>
+      </div>
+      <div class="quees-card">
+        <span class="quees-icon">⚖️</span>
+        <div class="quees-q">¿Qué resuelve?</div>
+        <div class="quees-a">Asuntos que las partes <strong>voluntariamente</strong> le lleven y que sean <span class="glos" data-def="Asuntos sobre los que las partes pueden negociar y llegar a acuerdos libremente (deudas, arriendos, daños, convivencia).">conciliables</span>, hasta una cuantía de 100 <span class="glos" data-def="Salarios Mínimos Legales Mensuales Vigentes. En 2026 equivale a unos $175 millones de pesos.">SMLMV</span>. Sus actas tienen <span class="glos" data-def="El acuerdo es definitivo y obligatorio: puede exigirse ante un juez si alguien lo incumple.">efectos de cosa juzgada</span>.</div>
+      </div>
+      <div class="quees-card">
+        <span class="quees-icon">🚫</span>
+        <div class="quees-q">¿Qué NO resuelve?</div>
+        <div class="quees-a">No conoce <strong>delitos</strong>, asuntos de <strong>estado civil</strong> (divorcios, custodia), acciones constitucionales ni casos contra el Estado. Tampoco puede <strong>imponer</strong> decisiones: las partes acuden y construyen el acuerdo libremente.</div>
       </div>
     </div>
   </div>
@@ -877,12 +1162,12 @@ footer {
     <p class="section-tag fade-up">Justicia de paz en los Andes</p>
     <h2 class="section-title fade-up">Tres países, una misma raíz</h2>
     <p class="section-lead fade-up">
-      El congreso surge del primer diálogo preparatorio andino (Workshop del 26 de marzo de 2026), donde Colombia, Ecuador y Perú compararon sus modelos, cifras y desafíos en torno a la justicia comunitaria de paz.
+      El congreso surge del diálogo preparatorio andino (Workshop del 26 de marzo de 2026), donde Colombia, Ecuador y Perú compararon sus modelos, cifras y desafíos en torno a la justicia comunitaria de paz.
     </p>
 
     <div class="andean-grid fade-up">
       <div class="andean-card colombia">
-        <span class="country-tag">🇨🇴 Colombia</span>
+        <span class="country-tag"><span class="country-flag">🇨🇴</span><span class="country-name">Colombia</span></span>
         <div class="big-number">521</div>
         <div class="big-label">jueces de paz activos</div>
         <ul class="card-facts">
@@ -894,7 +1179,7 @@ footer {
         </ul>
       </div>
       <div class="andean-card ecuador">
-        <span class="country-tag">🇪🇨 Ecuador</span>
+        <span class="country-tag"><span class="country-flag">🇪🇨</span><span class="country-name">Ecuador</span></span>
         <div class="big-number">400</div>
         <div class="big-label">jueces de paz activos</div>
         <ul class="card-facts">
@@ -906,48 +1191,16 @@ footer {
         </ul>
       </div>
       <div class="andean-card peru">
-        <span class="country-tag">🇵🇪 Perú</span>
+        <span class="country-tag"><span class="country-flag">🇵🇪</span><span class="country-name">Perú</span></span>
         <div class="big-number">5.769</div>
         <div class="big-label">jueces de paz activos</div>
         <ul class="card-facts">
           <li>203 años de historia · desde 1823</li>
           <li>Duplica el número de jueces ordinarios</li>
           <li>48 lenguas · ~100 intérpretes especializados</li>
-          <li>Sistema SISJUPAZ y plataforma Yachay</li>
+          <li>Sistemas SISJUPAZ y Yachay</li>
           <li>Integrado al sistema formal de justicia</li>
         </ul>
-      </div>
-    </div>
-
-    <!-- Salas del workshop -->
-    <div style="margin-top:72px">
-      <p class="section-tag fade-up">Workshop andino · 26 de marzo de 2026</p>
-      <h2 class="section-title fade-up" style="margin-bottom:40px">Diálogo preparatorio</h2>
-      <div class="salas-grid fade-up">
-        <div class="sala-card" data-num="★">
-          <div class="sala-num">Sala General</div>
-          <div class="sala-title">Espacio de articulación y diálogo sobre la Justicia de Paz</div>
-          <div class="sala-desc">Presentación de las tres delegaciones y cifras comparadas: 521 jueces en Colombia, 400 en Ecuador, 5.769 en Perú. Punto de partida para el congreso de julio.</div>
-          <div class="sala-mod"><strong>Moderación</strong>Marcela Pérez Cárdenas · Personería de Bogotá</div>
-        </div>
-        <div class="sala-card" data-num="1">
-          <div class="sala-num">Sala 1</div>
-          <div class="sala-title">Aspectos formales y reglamentarios</div>
-          <div class="sala-desc">Debate sobre modelos de elección, requisitos de arraigo, período, competencias y la tensión entre legitimidad comunitaria y garantías jurídicas mínimas.</div>
-          <div class="sala-mod"><strong>Moderación</strong>Andrés Felipe Torres Hurtado · Personería de Bogotá</div>
-        </div>
-        <div class="sala-card" data-num="2">
-          <div class="sala-num">Sala 2</div>
-          <div class="sala-title">Convivencia, legitimidad social y respuesta comunitaria</div>
-          <div class="sala-desc">Análisis del arraigo comunitario como eje de la eficacia del juez de paz. Articulación con la justicia ordinaria: subordinación, acompañamiento o autonomía formal.</div>
-          <div class="sala-mod"><strong>Moderación</strong>Arturo Suárez Acero · DNP</div>
-        </div>
-        <div class="sala-card" data-num="3">
-          <div class="sala-num">Sala 3</div>
-          <div class="sala-title">Fortalecimiento institucional</div>
-          <div class="sala-desc">Propuestas para actualizar el marco normativo (Ley 497/1999), diseñar incentivos compatibles con el carácter comunitario, e implementar sistemas de registro y transparencia.</div>
-          <div class="sala-mod"><strong>Moderación</strong>Marcela Pérez Cárdenas · Personería de Bogotá</div>
-        </div>
       </div>
     </div>
   </div>
@@ -958,199 +1211,195 @@ footer {
   <div class="container">
     <p class="section-tag fade-up">Programa oficial</p>
     <h2 class="section-title fade-up">Agenda del Congreso</h2>
-    <p class="section-lead fade-up">Dos jornadas — una abierta al público, una técnica de puertas cerradas — para construir propuestas de política pública andina sobre justicia de paz.</p>
+    <p class="section-lead fade-up">Una jornada académica completa y abierta al público: conferencias magistrales, tres paneles internacionales y un cierre artístico.</p>
 
-    <div class="agenda-tabs fade-up">
-      <button class="tab-btn active" onclick="switchTab('dia1', this)">Día 1 · 8 julio</button>
-      <button class="tab-btn" onclick="switchTab('dia2', this)">Día 2 · 9 julio</button>
-    </div>
-
-    <div id="dia1" class="tab-panel active">
-      <div class="timeline">
-
-        <div class="t-item highlight">
-          <div class="t-time">7:30</div>
-          <div class="t-content">
-            <span class="t-badge badge-apertura">Recepción</span>
-            <div class="t-name">Registro y acreditación de asistentes</div>
-          </div>
-        </div>
-
-        <div class="t-item highlight">
-          <div class="t-time">8:00</div>
-          <div class="t-content">
-            <span class="t-badge badge-apertura">Apertura institucional</span>
-            <div class="t-name">Palabras de bienvenida y apertura oficial</div>
-            <div class="t-person">Personería de Bogotá · Universidad Santo Tomás · DNP · Ministerio de Justicia</div>
-          </div>
-        </div>
-
-        <div class="t-item keynote">
-          <div class="t-time">8:50</div>
-          <div class="t-content">
-            <span class="t-badge badge-especial">Video institucional</span>
-            <div class="t-name">Video institucional — Jueces de Paz en Colombia</div>
-          </div>
-        </div>
-
-        <div class="t-item keynote">
-          <div class="t-time">9:00</div>
-          <div class="t-content">
-            <span class="t-badge badge-conferencia">Conferencia magistral</span>
-            <div class="t-name">Jueces de paz: perspectiva y retos institucionales</div>
-            <div class="t-person">Liliana Cardona Chagüi</div>
-          </div>
-        </div>
-
-        <div class="t-item keynote">
-          <div class="t-time">9:30</div>
-          <div class="t-content">
-            <span class="t-badge badge-conferencia">Conferencia magistral</span>
-            <div class="t-name">La justicia de paz en el Perú: 203 años de experiencia comunitaria</div>
-            <div class="t-person">Johnny Cáceres Valencia · Concejo Ejecutivo del Poder Judicial del Perú</div>
-          </div>
-        </div>
-
-        <div class="t-item">
-          <div class="t-time">10:00</div>
-          <div class="t-content">
-            <span class="t-badge badge-qa">Preguntas</span>
-            <div class="t-name">Espacio de preguntas y respuestas</div>
-          </div>
-        </div>
-
-        <div class="t-item panel">
-          <div class="t-time">10:20</div>
-          <div class="t-content">
-            <span class="t-badge badge-panel">Panel 1</span>
-            <div class="t-name">Aspectos formales y reglamentarios: elección, competencia y rol del juez de paz</div>
-            <div class="t-person">Moderadora: Liliana Cardona Chagüi</div>
-          </div>
-        </div>
-
-        <div class="t-item">
-          <div class="t-time">11:10</div>
-          <div class="t-content">
-            <span class="t-badge badge-qa">Preguntas</span>
-            <div class="t-name">Espacio de preguntas y respuestas · Panel 1</div>
-          </div>
-        </div>
-
-        <div class="t-item">
-          <div class="t-time">11:30</div>
-          <div class="t-content">
-            <span class="t-badge badge-receso">Descanso</span>
-            <div class="t-name">Receso</div>
-          </div>
-        </div>
-
-        <div class="t-item panel">
-          <div class="t-time">11:45</div>
-          <div class="t-content">
-            <span class="t-badge badge-panel">Panel 2</span>
-            <div class="t-name">Construcción de convivencia, legitimidad social y respuesta comunitaria</div>
-            <div class="t-person">Moderador: Héctor Enrique Peña Salgado · Consejo Seccional de la Judicatura</div>
-          </div>
-        </div>
-
-        <div class="t-item">
-          <div class="t-time">12:35</div>
-          <div class="t-content">
-            <span class="t-badge badge-qa">Preguntas</span>
-            <div class="t-name">Espacio de preguntas y respuestas · Panel 2</div>
-          </div>
-        </div>
-
-        <div class="t-item">
-          <div class="t-time">12:55</div>
-          <div class="t-content">
-            <span class="t-badge badge-receso">Almuerzo</span>
-            <div class="t-name">Receso para almuerzo</div>
-          </div>
-        </div>
-
-        <div class="t-item keynote">
-          <div class="t-time">14:00</div>
-          <div class="t-content">
-            <span class="t-badge badge-conferencia">Conferencia magistral</span>
-            <div class="t-name">Justicia comunitaria y acceso a la justicia en América Latina</div>
-            <div class="t-person">Magaly Camila Ruíz Cajas</div>
-          </div>
-        </div>
-
-        <div class="t-item keynote">
-          <div class="t-time">14:30</div>
-          <div class="t-content">
-            <span class="t-badge badge-conferencia">Conferencia magistral</span>
-            <div class="t-name">Justicia en equidad: fundamentos y perspectivas de reforma</div>
-            <div class="t-person">Edgar Augusto Ardila Amaya</div>
-          </div>
-        </div>
-
-        <div class="t-item panel">
-          <div class="t-time">15:00</div>
-          <div class="t-content">
-            <span class="t-badge badge-panel">Panel 3</span>
-            <div class="t-name">Fortalecimiento institucional: marco normativo, incentivos y sostenibilidad</div>
-            <div class="t-person">Moderador: Andrés Felipe Torres Hurtado · Personería de Bogotá</div>
-          </div>
-        </div>
-
-        <div class="t-item">
-          <div class="t-time">15:50</div>
-          <div class="t-content">
-            <span class="t-badge badge-qa">Preguntas</span>
-            <div class="t-name">Espacio de preguntas y respuestas · Panel 3</div>
-          </div>
-        </div>
-
-        <div class="t-item keynote">
-          <div class="t-time">16:10</div>
-          <div class="t-content">
-            <span class="t-badge badge-conferencia">Conferencia de cierre</span>
-            <div class="t-name">Perspectivas de reforma normativa para los jueces de paz</div>
-            <div class="t-person">Gloria Inés Bohórquez Torres</div>
-          </div>
-        </div>
-
-        <div class="t-item highlight">
-          <div class="t-time">16:40</div>
-          <div class="t-content">
-            <span class="t-badge badge-cierre">Conclusiones</span>
-            <div class="t-name">Síntesis y conclusiones del congreso</div>
-            <div class="t-person">Marcela Pérez Cárdenas · Personera Delegada para Asuntos Policivos y Civiles</div>
-          </div>
-        </div>
-
-        <div class="t-item special">
-          <div class="t-time">17:00</div>
-          <div class="t-content">
-            <span class="t-badge badge-especial">✨ Cierre artístico</span>
-            <div class="t-name">Presentación artística de cierre</div>
-          </div>
-        </div>
-
+    <div class="agenda-day-banner fade-up">
+      <div class="day-big">8</div>
+      <div class="day-info">
+        <div class="day-date">Miércoles 8 de julio de 2026</div>
+        <div class="day-mode">Jornada abierta al público · 7:30 a.m. – 5:00 p.m.</div>
       </div>
     </div>
 
-    <div id="dia2" class="tab-panel">
-      <div class="dia2-card">
-        <h3>Jornada técnica de trabajo · 9 de julio</h3>
-        <p>
-          El segundo día es una sesión técnica de puertas cerradas, reservada exclusivamente para delegados institucionales, autoridades nacionales e invitados internacionales. Su objetivo es traducir los debates del Congreso en insumos concretos para la reforma normativa y el fortalecimiento institucional de la justicia de paz.
-        </p>
-        <div class="dia2-pills">
-          <span class="dia2-pill">🔒 Puertas cerradas</span>
-          <span class="dia2-pill">Delegados institucionales</span>
-          <span class="dia2-pill">Autoridades nacionales</span>
-          <span class="dia2-pill">Invitados internacionales</span>
-          <span class="dia2-pill">Colombia · Ecuador · Perú</span>
+    <div class="timeline">
+
+      <div class="t-item highlight">
+        <div class="t-time">7:30</div>
+        <div class="t-content">
+          <span class="t-badge badge-apertura">Registro</span>
+          <div class="t-name">Registro de los asistentes</div>
         </div>
-        <br><br>
-        <p style="font-size:14px; opacity:0.6;">
-          Los 7 ejes temáticos identificados en el workshop andino del 26 de marzo de 2026 son la agenda base para esta jornada: legitimidad y elección · naturaleza y equidad · acceso a la justicia · articulación institucional · condiciones materiales · marco normativo · sistemas de información.
-        </p>
       </div>
+
+      <div class="t-item highlight">
+        <div class="t-time">7:50</div>
+        <div class="t-content">
+          <span class="t-badge badge-apertura">Apertura</span>
+          <div class="t-name">Apertura institucional</div>
+          <div class="t-person">Saludo del presentador e himnos</div>
+        </div>
+      </div>
+
+      <div class="t-item highlight">
+        <div class="t-time">8:00</div>
+        <div class="t-content">
+          <span class="t-badge badge-apertura">Instalación</span>
+          <div class="t-name">Instalación e intervenciones protocolarias</div>
+          <div class="t-person">
+            Andrés Castro Franco · Personero de Bogotá — palabras de apertura<br>
+            Rector · Universidad Santo Tomás<br>
+            Iván Darío Tarazona · Decano Facultad de Derecho, USTA<br>
+            Jorge Iván Cuervo · Ministerio de Justicia y del Derecho<br>
+            Mary Lucero Novoa · Presidenta, Consejo Superior de la Judicatura
+          </div>
+        </div>
+      </div>
+
+      <div class="t-item keynote">
+        <div class="t-time">8:30</div>
+        <div class="t-content">
+          <span class="t-badge badge-conferencia">Conferencia magistral</span>
+          <div class="t-name">Estado actual y perspectivas de la Jurisdicción de Paz en Colombia</div>
+          <div class="t-person">Liliana Cardona Chagüi · Magistrada, Consejo Superior de la Judicatura</div>
+        </div>
+      </div>
+
+      <div class="t-item special">
+        <div class="t-time">8:50</div>
+        <div class="t-content">
+          <span class="t-badge badge-especial">Audiovisual</span>
+          <div class="t-name">Video institucional</div>
+        </div>
+      </div>
+
+      <div class="t-item keynote">
+        <div class="t-time">9:00</div>
+        <div class="t-content">
+          <span class="t-badge badge-conferencia">Conferencia magistral</span>
+          <div class="t-name">La justicia de paz en el Perú: 203 años de experiencia comunitaria</div>
+          <div class="t-person">Johnny Cáceres Valencia · Concejo Ejecutivo del Poder Judicial del Perú</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-time">10:00</div>
+        <div class="t-content">
+          <span class="t-badge badge-qa">Preguntas</span>
+          <div class="t-name">Espacio de preguntas y respuestas</div>
+        </div>
+      </div>
+
+      <div class="t-item panel">
+        <div class="t-time">10:20</div>
+        <div class="t-content">
+          <span class="t-badge badge-panel">Panel 1</span>
+          <div class="t-name">Aspectos formales y reglamentarios: elección, competencia y rol del juez de paz</div>
+          <div class="t-person">Moderadora: Liliana Cardona Chagüi</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-time">11:10</div>
+        <div class="t-content">
+          <span class="t-badge badge-qa">Preguntas</span>
+          <div class="t-name">Espacio de preguntas y respuestas · Panel 1</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-time">11:30</div>
+        <div class="t-content">
+          <span class="t-badge badge-receso">Descanso</span>
+          <div class="t-name">Receso</div>
+        </div>
+      </div>
+
+      <div class="t-item panel">
+        <div class="t-time">11:45</div>
+        <div class="t-content">
+          <span class="t-badge badge-panel">Panel 2</span>
+          <div class="t-name">Construcción de convivencia, legitimidad social y respuesta comunitaria</div>
+          <div class="t-person">Moderador: Héctor Enrique Peña Salgado · Consejo Seccional de la Judicatura</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-time">12:35</div>
+        <div class="t-content">
+          <span class="t-badge badge-qa">Preguntas</span>
+          <div class="t-name">Espacio de preguntas y respuestas · Panel 2</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-time">12:55</div>
+        <div class="t-content">
+          <span class="t-badge badge-receso">Almuerzo</span>
+          <div class="t-name">Receso para almuerzo</div>
+        </div>
+      </div>
+
+      <div class="t-item keynote">
+        <div class="t-time">14:00</div>
+        <div class="t-content">
+          <span class="t-badge badge-conferencia">Conferencia magistral</span>
+          <div class="t-name">Justicia comunitaria y acceso a la justicia en América Latina</div>
+          <div class="t-person">Magaly Camila Ruíz Cajas</div>
+        </div>
+      </div>
+
+      <div class="t-item keynote">
+        <div class="t-time">14:30</div>
+        <div class="t-content">
+          <span class="t-badge badge-conferencia">Conferencia magistral</span>
+          <div class="t-name">Justicia en equidad: fundamentos y perspectivas de reforma</div>
+          <div class="t-person">Edgar Augusto Ardila Amaya</div>
+        </div>
+      </div>
+
+      <div class="t-item panel">
+        <div class="t-time">15:00</div>
+        <div class="t-content">
+          <span class="t-badge badge-panel">Panel 3</span>
+          <div class="t-name">Fortalecimiento institucional: marco normativo, incentivos y sostenibilidad</div>
+          <div class="t-person">Moderador: Andrés Felipe Torres Hurtado · Agente Ministerio Público, Personería de Bogotá</div>
+        </div>
+      </div>
+
+      <div class="t-item">
+        <div class="t-time">15:50</div>
+        <div class="t-content">
+          <span class="t-badge badge-qa">Preguntas</span>
+          <div class="t-name">Espacio de preguntas y respuestas · Panel 3</div>
+        </div>
+      </div>
+
+      <div class="t-item keynote">
+        <div class="t-time">16:10</div>
+        <div class="t-content">
+          <span class="t-badge badge-conferencia">Conferencia de cierre</span>
+          <div class="t-name">Perspectivas de reforma normativa para los jueces de paz</div>
+          <div class="t-person">Gloria Inés Bohórquez Torres</div>
+        </div>
+      </div>
+
+      <div class="t-item highlight">
+        <div class="t-time">16:40</div>
+        <div class="t-content">
+          <span class="t-badge badge-cierre">Conclusiones</span>
+          <div class="t-name">Síntesis y conclusiones del congreso</div>
+          <div class="t-person">Marcela Pérez Cárdenas · Personera Delegada para Asuntos Policivos y Civiles</div>
+        </div>
+      </div>
+
+      <div class="t-item special">
+        <div class="t-time">17:00</div>
+        <div class="t-content">
+          <span class="t-badge badge-especial">✨ Cierre</span>
+          <div class="t-name">Presentación artística de cierre</div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1159,20 +1408,19 @@ footer {
 <section id="ponentes">
   <div class="container">
     <p class="section-tag fade-up">Quiénes participan</p>
-    <h2 class="section-title fade-up">Ponentes y panelistas</h2>
-    <p class="section-lead fade-up">Haz clic en cada tarjeta para ver el perfil completo de cada participante.</p>
+    <h2 class="section-title fade-up">Ponentes, panelistas y autoridades</h2>
+    <p class="section-lead fade-up">Toca cada tarjeta para ver el perfil completo. Puedes filtrar por país o por tipo de participación.</p>
 
     <div class="speakers-filter fade-up">
       <button class="filter-btn active" onclick="filterSpeakers('all', this)">Todos</button>
       <button class="filter-btn" onclick="filterSpeakers('colombia', this)">🇨🇴 Colombia</button>
       <button class="filter-btn" onclick="filterSpeakers('ecuador', this)">🇪🇨 Ecuador</button>
       <button class="filter-btn" onclick="filterSpeakers('peru', this)">🇵🇪 Perú</button>
-      <button class="filter-btn" onclick="filterSpeakers('magistral', this)">Conferencias magistrales</button>
+      <button class="filter-btn" onclick="filterSpeakers('magistral', this)">Conferencistas</button>
+      <button class="filter-btn" onclick="filterSpeakers('apertura', this)">Instalación</button>
     </div>
 
-    <div class="speakers-grid fade-up" id="speakers-grid">
-      <!-- JS inserta las tarjetas -->
-    </div>
+    <div class="speakers-grid fade-up" id="speakers-grid"></div>
   </div>
 </section>
 
@@ -1181,7 +1429,7 @@ footer {
   <div class="container">
     <p class="section-tag fade-up">Programa académico</p>
     <h2 class="section-title fade-up">Los tres paneles</h2>
-    <p class="section-lead fade-up">Abre cada panel para conocer sus participantes, temas y la pregunta orientadora que guiará el debate.</p>
+    <p class="section-lead fade-up">Abre cada panel para conocer sus participantes, temas y la pregunta orientadora del debate.</p>
 
     <div class="paneles-accordion fade-up">
 
@@ -1190,31 +1438,22 @@ footer {
           <div class="panel-num">1</div>
           <div>
             <div class="panel-head-title">Aspectos formales y reglamentarios</div>
-            <div class="panel-head-sub">Elección, competencia y rol del juez de paz · Moderadora: Liliana Cardona Chagüi</div>
+            <div class="panel-head-sub">Elección, competencia y rol del juez de paz · Modera: Liliana Cardona Chagüi</div>
           </div>
           <div class="panel-arrow">▾</div>
         </div>
         <div class="panel-body">
           <div class="panel-meta">
-            <div class="panel-meta-item">
-              <span class="panel-meta-label">Hora</span>
-              <span class="panel-meta-val">10:20 a.m.</span>
-            </div>
-            <div class="panel-meta-item">
-              <span class="panel-meta-label">Moderadora</span>
-              <span class="panel-meta-val">Liliana Cardona Chagüi</span>
-            </div>
-            <div class="panel-meta-item">
-              <span class="panel-meta-label">Países</span>
-              <span class="panel-meta-val">Colombia · Ecuador · Perú</span>
-            </div>
+            <div><span class="panel-meta-label">Hora</span><span class="panel-meta-val">10:20 a.m.</span></div>
+            <div><span class="panel-meta-label">Moderadora</span><span class="panel-meta-val">Liliana Cardona Chagüi</span></div>
+            <div><span class="panel-meta-label">Países</span><span class="panel-meta-val">Colombia · Ecuador · Perú</span></div>
           </div>
           <div class="panel-speakers-list">
-            <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Adriana Covelli Soto</div><div class="ps-info">Consejo Superior de la Judicatura · Colombia</div></div></div>
+            <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Adriana Covelli Soto</div><div class="ps-info">Asesora · Consejo Superior de la Judicatura · Colombia</div></div></div>
             <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Héctor Enrique Peña Salgado</div><div class="ps-info">Magistrado · Consejo Seccional de la Judicatura de Bogotá · Colombia</div></div></div>
             <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Diana María Vélez Vásquez</div><div class="ps-info">Magistrada · Comisión Nacional de Disciplina Judicial · Colombia</div></div></div>
             <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Alisson Mora Pazmiño</div><div class="ps-info">Subdirectora Nacional de Centros de Mediación y Justicia de Paz · Ecuador</div></div></div>
-            <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Jenny Violeta Díaz</div><div class="ps-info">Jueza de paz · Ecuador</div></div></div>
+            <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Jenny Violeta Díaz</div><div class="ps-info">Jueza de Paz · Ecuador</div></div></div>
             <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Roxana Vergara</div><div class="ps-info">PNUD Perú</div></div></div>
           </div>
           <div class="panel-temas">
@@ -1226,9 +1465,9 @@ footer {
             <span class="tema-pill">Competencias y materias excluidas</span>
             <span class="tema-pill">Formación continua</span>
           </div>
-          <div style="margin-top:20px; padding:16px; background:rgba(212,160,23,0.06); border-radius:4px;">
-            <span style="font-family:Inter,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dorado);display:block;margin-bottom:8px;">Pregunta orientadora</span>
-            <p style="font-size:14px;font-style:italic;color:rgba(245,237,216,0.7);">"¿Cuál es el equilibrio adecuado entre la legitimidad comunitaria y las garantías jurídicas mínimas?"</p>
+          <div class="pregunta-box">
+            <span>Pregunta orientadora</span>
+            <p>"¿Cuál es el equilibrio adecuado entre la legitimidad comunitaria y las garantías jurídicas mínimas?"</p>
           </div>
         </div>
       </div>
@@ -1238,32 +1477,23 @@ footer {
           <div class="panel-num">2</div>
           <div>
             <div class="panel-head-title">Convivencia, legitimidad social y respuesta comunitaria</div>
-            <div class="panel-head-sub">El aporte de la justicia de paz a la conflictividad · Moderador: Héctor Enrique Peña Salgado</div>
+            <div class="panel-head-sub">El aporte de la justicia de paz · Modera: Héctor Enrique Peña Salgado</div>
           </div>
           <div class="panel-arrow">▾</div>
         </div>
         <div class="panel-body">
           <div class="panel-meta">
-            <div class="panel-meta-item">
-              <span class="panel-meta-label">Hora</span>
-              <span class="panel-meta-val">11:45 a.m.</span>
-            </div>
-            <div class="panel-meta-item">
-              <span class="panel-meta-label">Moderador</span>
-              <span class="panel-meta-val">Héctor Enrique Peña Salgado</span>
-            </div>
-            <div class="panel-meta-item">
-              <span class="panel-meta-label">Países</span>
-              <span class="panel-meta-val">Colombia · Ecuador · Perú</span>
-            </div>
+            <div><span class="panel-meta-label">Hora</span><span class="panel-meta-val">11:45 a.m.</span></div>
+            <div><span class="panel-meta-label">Moderador</span><span class="panel-meta-val">Héctor Enrique Peña Salgado</span></div>
+            <div><span class="panel-meta-label">Países</span><span class="panel-meta-val">Colombia · Ecuador · Perú</span></div>
           </div>
           <div class="panel-speakers-list">
             <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Fabián Villalba Mayorga</div><div class="ps-info">Consejo Seccional de la Judicatura de Cundinamarca y Bogotá · Colombia</div></div></div>
             <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Hugo Humberto Soler</div><div class="ps-info">Secretaría Distrital de Seguridad, Convivencia y Justicia · Colombia</div></div></div>
-            <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Evelyn del Hierro Herrera</div><div class="ps-info">Consejo de la Judicatura · Ecuador</div></div></div>
+            <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Evelyn del Hierro Herrera</div><div class="ps-info">Analista Nacional de Justicia de Paz · Consejo de la Judicatura · Ecuador</div></div></div>
             <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Patricio Capa</div><div class="ps-info">Juez de Paz · Ecuador</div></div></div>
             <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Karim Velasco</div><div class="ps-info">PNUD Perú</div></div></div>
-            <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Alejandrina Luglio</div><div class="ps-info">Jefa · Oficina Nacional de Apoyo a la Justicia de Paz e Indígena · Poder Judicial del Perú</div></div></div>
+            <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">Alejandrina Luglio</div><div class="ps-info">Jefa · Oficina Nacional de Apoyo a la Justicia de Paz y Justicia Indígena · Poder Judicial del Perú</div></div></div>
           </div>
           <div class="panel-temas">
             <h4>Temas centrales</h4>
@@ -1274,9 +1504,9 @@ footer {
             <span class="tema-pill">Brechas de género y generacionales</span>
             <span class="tema-pill">Competencia territorial</span>
           </div>
-          <div style="margin-top:20px; padding:16px; background:rgba(212,160,23,0.06); border-radius:4px;">
-            <span style="font-family:Inter,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dorado);display:block;margin-bottom:8px;">Pregunta orientadora</span>
-            <p style="font-size:14px;font-style:italic;color:rgba(245,237,216,0.7);">"¿Cómo integrar la justicia de paz dentro de una estrategia amplia de acceso a la justicia sin perder su naturaleza comunitaria?"</p>
+          <div class="pregunta-box">
+            <span>Pregunta orientadora</span>
+            <p>"¿Cómo integrar la justicia de paz dentro de una estrategia amplia de acceso a la justicia sin perder su naturaleza comunitaria?"</p>
           </div>
         </div>
       </div>
@@ -1286,24 +1516,15 @@ footer {
           <div class="panel-num">3</div>
           <div>
             <div class="panel-head-title">Fortalecimiento institucional</div>
-            <div class="panel-head-sub">Marco normativo, incentivos y sostenibilidad · Moderador: Andrés Felipe Torres Hurtado</div>
+            <div class="panel-head-sub">Marco normativo, incentivos y sostenibilidad · Modera: Andrés Felipe Torres Hurtado</div>
           </div>
           <div class="panel-arrow">▾</div>
         </div>
         <div class="panel-body">
           <div class="panel-meta">
-            <div class="panel-meta-item">
-              <span class="panel-meta-label">Hora</span>
-              <span class="panel-meta-val">3:00 p.m.</span>
-            </div>
-            <div class="panel-meta-item">
-              <span class="panel-meta-label">Moderador</span>
-              <span class="panel-meta-val">Andrés Felipe Torres Hurtado</span>
-            </div>
-            <div class="panel-meta-item">
-              <span class="panel-meta-label">Países</span>
-              <span class="panel-meta-val">Colombia · Ecuador · Perú</span>
-            </div>
+            <div><span class="panel-meta-label">Hora</span><span class="panel-meta-val">3:00 p.m.</span></div>
+            <div><span class="panel-meta-label">Moderador</span><span class="panel-meta-val">Andrés Felipe Torres Hurtado · Personería de Bogotá</span></div>
+            <div><span class="panel-meta-label">Países</span><span class="panel-meta-val">Colombia · Ecuador · Perú</span></div>
           </div>
           <div class="panel-speakers-list">
             <div class="ps-item"><div class="ps-dot"></div><div><div class="ps-name">César Andrés Restrepo Flórez</div><div class="ps-info">Secretario Distrital de Seguridad, Convivencia y Justicia · Colombia</div></div></div>
@@ -1322,11 +1543,10 @@ footer {
             <span class="tema-pill">Sistemas de registro (SISJUPAZ)</span>
             <span class="tema-pill">Condiciones materiales</span>
             <span class="tema-pill">Aprendizaje comparado</span>
-            <span class="tema-pill">Política pública de justicia local</span>
           </div>
-          <div style="margin-top:20px; padding:16px; background:rgba(212,160,23,0.06); border-radius:4px;">
-            <span style="font-family:Inter,sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dorado);display:block;margin-bottom:8px;">Pregunta orientadora</span>
-            <p style="font-size:14px;font-style:italic;color:rgba(245,237,216,0.7);">"¿Cómo garantizar sostenibilidad y dignificación del rol sin convertir la figura en un cargo tradicional?"</p>
+          <div class="pregunta-box">
+            <span>Pregunta orientadora</span>
+            <p>"¿Cómo garantizar sostenibilidad y dignificación del rol sin convertir la figura en un cargo tradicional?"</p>
           </div>
         </div>
       </div>
@@ -1335,72 +1555,114 @@ footer {
   </div>
 </section>
 
-<!-- WORKSHOP -->
+<!-- WORKSHOP + DOCUMENTOS -->
 <section id="workshop">
   <div class="container">
     <p class="section-tag fade-up">Antecedente · 26 de marzo de 2026</p>
     <h2 class="section-title fade-up">Reflexión Andina — Workshop preparatorio</h2>
-    <p class="section-lead fade-up">Antes del congreso, Colombia, Ecuador y Perú se reunieron en un workshop de tres salas temáticas para identificar consensos y construir la agenda del Foro de julio.</p>
+    <p class="section-lead fade-up">Antes del congreso, las delegaciones de Colombia, Ecuador y Perú se reunieron en un workshop de tres salas temáticas que construyó la agenda del 8 de julio.</p>
 
     <div class="workshop-intro">
       <div class="workshop-text fade-up">
-        <p>El Workshop "Reflexión Andina sobre la Justicia de Paz" (26 de marzo de 2026) fue convocado por la Personería de Bogotá como espacio preparatorio del congreso. Reunió a delegaciones de Colombia, Ecuador y Perú en tres salas de trabajo simultáneas, cada una abordando un eje temático central.</p>
-        <p>Los resultados — logros, dificultades y propuestas de las tres salas — fueron sintetizados en la Plenaria Final y constituyen el insumo técnico directo para el debate del 8 de julio.</p>
-        <p>La relatoría integral del workshop identifica 7 ejes prioritarios que estructuran los paneles del congreso y la agenda de la jornada técnica del 9 de julio.</p>
+        <p>El Workshop "Reflexión Andina sobre la Justicia de Paz" fue convocado por la Personería de Bogotá como espacio preparatorio del congreso. Reunió a las tres delegaciones en salas de trabajo simultáneas: aspectos formales y reglamentarios (Sala 1), convivencia y legitimidad social (Sala 2) y fortalecimiento institucional (Sala 3).</p>
+        <p>Los resultados — logros, dificultades y propuestas — fueron sintetizados en la Plenaria Final y constituyen el insumo técnico directo para los paneles del congreso.</p>
+        <p>Puedes descargar la relatoría integral del workshop más abajo. 👇</p>
       </div>
 
       <div class="concl-cards fade-up">
         <div class="concl-card">
           <div class="concl-num">01</div>
           <div class="concl-title">Legitimidad y arraigo comunitario</div>
-          <div class="concl-desc">¿Cómo diseñar mecanismos de selección que fortalezcan la legitimidad sin politización?</div>
+          <div class="concl-desc">¿Cómo diseñar mecanismos de selección que fortalezcan la legitimidad sin politización electoral?</div>
         </div>
         <div class="concl-card">
           <div class="concl-num">02</div>
           <div class="concl-title">Equidad, formación y límites</div>
-          <div class="concl-desc">Fortalecer capacidades sin desnaturalizar la justicia en equidad.</div>
+          <div class="concl-desc">Fortalecer capacidades sin desnaturalizar la justicia en equidad ni sobre-juridificar la figura.</div>
         </div>
         <div class="concl-card">
           <div class="concl-num">03–07</div>
-          <div class="concl-title">Acceso · Fortalecimiento · Sostenibilidad · Marco normativo · Sistemas de información</div>
-          <div class="concl-desc">Agenda técnica completa para la jornada cerrada del 9 de julio.</div>
+          <div class="concl-title">Acceso · Articulación · Sostenibilidad · Marco normativo · Sistemas de información</div>
+          <div class="concl-desc">Los siete ejes de la relatoría estructuran los paneles y el debate del congreso.</div>
         </div>
       </div>
     </div>
 
-    <div class="tres-paises fade-up">
-      <div class="pais-bloque">
-        <span class="pais-flag">🇨🇴</span>
-        <div class="pais-name">Colombia</div>
-        <ul class="pais-list">
-          <li>521 jueces de paz · Ley 497/1999</li>
-          <li>Elección popular · período 5 años</li>
-          <li>78.71% tasa de conciliación (2025)</li>
-          <li>Marco normativo desactualizado: reto central</li>
-          <li>Personería de Bogotá como motor institucional</li>
-        </ul>
+    <!-- DOCUMENTOS -->
+    <div style="margin-top:64px">
+      <p class="section-tag fade-up">Biblioteca del congreso</p>
+      <h2 class="section-title fade-up" style="margin-bottom:8px">Documentos</h2>
+      <div class="docs-grid fade-up">
+        <a href="docs/Relatoria_Workshop_Reflexion_Andina.pdf" target="_blank" class="doc-card">
+          <div class="doc-icon">📄</div>
+          <div>
+            <div class="doc-title">Relatoría integral · Workshop Reflexión Andina</div>
+            <div class="doc-desc">Documento de trabajo con las relatorías de las tres salas temáticas, la matriz de análisis (logros, dificultades y propuestas) y las conclusiones de la Plenaria Final del 26 de marzo de 2026.</div>
+            <span class="doc-cta">Descargar PDF →</span>
+          </div>
+        </a>
+        <a href="docs/Capacitacion_jueces_de_paz.pdf" target="_blank" class="doc-card">
+          <div class="doc-icon">📊</div>
+          <div>
+            <div class="doc-title">Capacitación · Ley 497 de 1999</div>
+            <div class="doc-desc">Presentación de la Personería de Bogotá sobre el marco normativo de los jueces de paz: principios, requisitos, competencia, procedimiento y régimen disciplinario.</div>
+            <span class="doc-cta">Descargar PDF →</span>
+          </div>
+        </a>
       </div>
-      <div class="pais-bloque">
-        <span class="pais-flag">🇪🇨</span>
-        <div class="pais-name">Ecuador</div>
-        <ul class="pais-list">
-          <li>400 jueces · elegidos por la comunidad</li>
-          <li>Sin período fijo — permanencia por confianza</li>
-          <li>~80% tasa de conciliación</li>
-          <li>Modelo de acompañamiento no sancionatorio</li>
-          <li>Articulación con universidades y gobiernos locales</li>
-        </ul>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <p class="section-tag fade-up">Preguntas frecuentes</p>
+    <h2 class="section-title fade-up">Lo que necesitas saber para asistir</h2>
+
+    <div class="faq-list fade-up">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">¿El congreso tiene costo? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">No. La jornada del 8 de julio es completamente <strong>gratuita y abierta al público</strong>. Es organizada por la Personería de Bogotá como un espacio de ciudad.</div>
       </div>
-      <div class="pais-bloque">
-        <span class="pais-flag">🇵🇪</span>
-        <div class="pais-name">Perú</div>
-        <ul class="pais-list">
-          <li>5.769 jueces · desde 1823</li>
-          <li>Duplica el número de jueces ordinarios</li>
-          <li>48 lenguas · 100 intérpretes</li>
-          <li>SISJUPAZ y Yachay: sistemas de gestión</li>
-          <li>Modelo estatal de apoyo estructurado</li>
-        </ul>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">¿Necesito inscribirme previamente? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Sí, se recomienda inscribirse para garantizar tu cupo, ya que el aforo del auditorio es limitado. El registro presencial inicia a las 7:30 a.m. el día del evento. Atento a los canales oficiales de la Personería de Bogotá para el enlace de inscripción.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">¿Habrá certificado de asistencia? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a"><strong>Sí.</strong> Se entregará certificado de asistencia a quienes participen en el congreso. Para recibirlo es indispensable haber completado el <strong>registro de asistencia</strong> el día del evento. Los detalles sobre la entrega del certificado se confirmarán a través de los canales oficiales de la Personería de Bogotá y la Universidad Santo Tomás.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">¿A quién está dirigido? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">A todo público: jueces y juezas de paz, estudiantes y profesionales del derecho, líderes comunitarios, servidores públicos, academia y cualquier ciudadano interesado en la justicia comunitaria. La sección "¿Qué es un juez de paz?" de esta página te da todo el contexto necesario si llegas sin conocimiento previo.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">¿Cómo llego a la Universidad Santo Tomás? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">La sede está en la <strong>Cra. 9 No. 72–90</strong> (Edificio Doctor Angélico), en Chapinero. La parada de SITP más cercana es <strong>Carrera 9 (Kr 9 – Cl 73)</strong>, a 2 minutos a pie. La zona también está servida por el corredor de la <strong>Calle 72</strong> y las estaciones de Avenida Chile. Encuentra abajo, en la sección <a href="#lugar" style="color:var(--azul);font-weight:600">Sede</a>, las rutas del SITP, los parqueaderos cercanos y el mapa interactivo de Google Maps.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">¿Puedo hacer preguntas a los panelistas? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">Sí. La agenda incluye <strong>tres espacios de preguntas y respuestas</strong> después de las conferencias magistrales y de cada panel, abiertos a la participación del público asistente.</div>
+      </div>
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-q">¿Dónde encuentro los documentos técnicos del congreso? <span class="faq-arrow">▾</span></div>
+        <div class="faq-a">En la sección <a href="#workshop" style="color:var(--azul);font-weight:600">Biblioteca del congreso</a> de esta misma página puedes descargar la relatoría integral del Workshop Reflexión Andina y la presentación de capacitación sobre la Ley 497 de 1999.</div>
+      </div>
+    </div>
+
+    <!-- CAJA DE PREGUNTAS DEL PÚBLICO -->
+    <div class="pregunta-publico fade-up">
+      <div class="pp-left">
+        <div class="pp-title">¿Tienes alguna pregunta o comentario?</div>
+        <p class="pp-text">Escríbenos tu duda o comentario sobre el congreso. Al enviar, se abrirá tu correo con el mensaje listo para la Personería de Bogotá.</p>
+      </div>
+      <div class="pp-form">
+        <input type="text" id="pp-nombre" class="pp-input" placeholder="Tu nombre (opcional)">
+        <input type="email" id="pp-email" class="pp-input" placeholder="Tu correo (opcional)">
+        <textarea id="pp-mensaje" class="pp-input pp-textarea" placeholder="Escribe aquí tu pregunta o comentario..."></textarea>
+        <button class="pp-btn" onclick="enviarPregunta()">Enviar pregunta por correo ✉️</button>
+        <p class="pp-aviso" id="pp-aviso"></p>
       </div>
     </div>
   </div>
@@ -1427,15 +1689,15 @@ footer {
           <div class="lugar-detail">
             <span class="lugar-detail-icon">📅</span>
             <div>
-              <span class="lugar-detail-label">Día 1 — Público</span>
+              <span class="lugar-detail-label">Fecha y horario</span>
               <span class="lugar-detail-val">Miércoles 8 de julio de 2026 · 7:30 a.m. – 5:00 p.m.</span>
             </div>
           </div>
           <div class="lugar-detail">
-            <span class="lugar-detail-icon">🔒</span>
+            <span class="lugar-detail-icon">🎟️</span>
             <div>
-              <span class="lugar-detail-label">Día 2 — Técnico</span>
-              <span class="lugar-detail-val">Jueves 9 de julio de 2026 · Delegados institucionales</span>
+              <span class="lugar-detail-label">Acceso</span>
+              <span class="lugar-detail-val">Jornada abierta al público</span>
             </div>
           </div>
           <div class="lugar-detail">
@@ -1455,42 +1717,43 @@ footer {
         </div>
       </div>
       <div class="lugar-map">
-        <div class="map-placeholder">
-          <span class="map-icon">🗺️</span>
-          <p>Universidad Santo Tomás<br>Cra. 9 No. 72–90 · Bogotá</p>
-          <a href="https://maps.google.com/?q=Universidad+Santo+Tomas+Bogota+Cra+9+72-90" target="_blank" class="map-link">Ver en Google Maps</a>
-        </div>
+        <iframe
+          src="https://www.google.com/maps?q=Universidad+Santo+Tom%C3%A1s+Carrera+9+72-90+Bogot%C3%A1&output=embed"
+          width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade" title="Mapa Universidad Santo Tomás"></iframe>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ORGANIZA -->
-<section id="organiza">
-  <div class="container">
-    <p class="section-tag">Instituciones</p>
-    <h2 class="section-title" style="color:var(--crema);margin-bottom:48px">Quiénes hacen posible el congreso</h2>
-    <div class="org-grid">
-      <div class="org-card">
-        <span class="org-label">Organiza</span>
-        <div class="org-name">Personería de Bogotá D.C.</div>
-        <div class="org-sub">Delegada para Asuntos Policivos y Civiles</div>
+    <!-- TRANSPORTE Y PARQUEADEROS -->
+    <div class="llegar-grid fade-up">
+      <div class="llegar-card">
+        <div class="llegar-head"><span class="llegar-ico">🚌</span> Llega en transporte público</div>
+        <p class="llegar-sub">Parada de SITP más cercana: <strong>Carrera 9 (Kr 9 – Cl 73)</strong>, a 2 min a pie del campus.</p>
+        <div class="rutas-label">Rutas SITP que paran cerca</div>
+        <div class="rutas-wrap">
+          <span class="ruta-pill">12</span><span class="ruta-pill">166</span><span class="ruta-pill">192</span>
+          <span class="ruta-pill">193B</span><span class="ruta-pill">593</span><span class="ruta-pill">A124</span>
+          <span class="ruta-pill">A319</span><span class="ruta-pill">A410</span><span class="ruta-pill">K309</span>
+          <span class="ruta-pill">T12</span><span class="ruta-pill">T13</span><span class="ruta-pill">T25</span>
+        </div>
+        <div class="rutas-label" style="margin-top:16px">TransMilenio / troncal</div>
+        <p class="llegar-sub" style="margin-bottom:0">Corredor <strong>Calle 72</strong> (Av. Caracas) y estaciones de <strong>Avenida Chile</strong>, a corta distancia. Tarifa aprox. $2.950.</p>
       </div>
-      <div class="org-card">
-        <span class="org-label">Con el apoyo de</span>
-        <div class="org-name">Departamento Nacional de Planeación</div>
-        <div class="org-sub">Subdirección de Justicia</div>
+
+      <div class="llegar-card">
+        <div class="llegar-head"><span class="llegar-ico">🅿️</span> Parqueaderos cercanos</div>
+        <p class="llegar-sub">Si vienes en carro, hay parqueaderos públicos a pocos minutos a pie. Te recomendamos llegar temprano (el registro abre a las 7:30 a.m.).</p>
+        <ul class="park-list">
+          <li><strong>Parqueadero Calle 73 No. 8-73</strong> · a ~2 cuadras de la sede</li>
+          <li><strong>Zona de parqueo pago</strong> sobre la Calle 72 y carreras aledañas (tarifa por hora regulada por el Distrito)</li>
+          <li><strong>Centro Comercial Avenida Chile</strong> (Ac 72 - Kr 10) · parqueadero cubierto, a ~4 min</li>
+        </ul>
+        <a href="https://co.parkopedia.com/parking/?lat=4.6555&lng=-74.0625" target="_blank" class="park-link">Ver más parqueaderos en Parkopedia →</a>
       </div>
-      <div class="org-card">
-        <span class="org-label">Con el apoyo de</span>
-        <div class="org-name">Ministerio de Justicia y del Derecho</div>
-        <div class="org-sub">República de Colombia</div>
-      </div>
-      <div class="org-card">
-        <span class="org-label">Sede académica</span>
-        <div class="org-name">Universidad Santo Tomás</div>
-        <div class="org-sub">Bogotá D.C. · Campus principal</div>
-      </div>
+    </div>
+
+    <div style="text-align:center; margin-top:36px">
+      <a href="https://www.google.com/maps/dir/?api=1&destination=Universidad+Santo+Tom%C3%A1s+Carrera+9+72-90+Bogot%C3%A1" target="_blank" class="btn-maps">🧭 Cómo llegar con Google Maps</a>
     </div>
   </div>
 </section>
@@ -1499,12 +1762,12 @@ footer {
 <footer>
   <div class="footer-logo">Congreso Raíz de Paz <span>· Jueces de Paz · Bogotá 2026</span></div>
   <div class="footer-tagline">"De las raíces más profundas nace la paz verdadera"</div>
-  <div style="font-family:Inter,sans-serif;font-size:11px;color:rgba(255,255,255,0.2);">Personería de Bogotá D.C.</div>
+  <div style="font-family:Inter,sans-serif;font-size:11px;color:rgba(255,255,255,0.3);">Organiza: Personería de Bogotá D.C.</div>
 </footer>
 
-<!-- Modal ponente -->
+<!-- Modal -->
 <div class="modal-overlay" id="modal" onclick="closeModal(event)">
-  <div class="modal-box" style="position:relative">
+  <div class="modal-box">
     <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open')">✕</button>
     <div class="modal-header">
       <div class="modal-avatar" id="modal-avatar"></div>
@@ -1523,176 +1786,168 @@ footer {
 </div>
 
 <script>
+// ─── MENÚ MÓVIL ───
+function toggleMenu() {
+  document.getElementById('burger').classList.toggle('open');
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function closeMenu() {
+  document.getElementById('burger').classList.remove('open');
+  document.getElementById('mobileMenu').classList.remove('open');
+}
+
 // ─── DATOS PONENTES ───
+const AZUL = '#004A93', VERDE = '#2D6A4F', PERU_C = '#0A5C8C', DORADO = '#B8860B';
+
 const speakers = [
-  {
-    id: 1, pais: 'colombia', categoria: 'magistral',
-    nombre: 'Liliana Cardona Chagüi',
-    rol: 'Conferencista magistral · Moderadora Panel 1',
-    inst: 'Colombia',
-    bio: 'Experta en justicia comunitaria y acceso a la justicia en Colombia. Su conferencia magistral abre el programa académico del congreso y modera el Panel 1 sobre aspectos formales y reglamentarios de la justicia de paz.',
-    temas: ['Justicia comunitaria', 'Acceso a la justicia', 'Marco normativo'],
-    color: '#6B3A1F'
-  },
-  {
-    id: 2, pais: 'peru', categoria: 'magistral',
-    nombre: 'Johnny Cáceres Valencia',
-    rol: 'Responsable de la Justicia de Paz a nivel nacional',
-    inst: 'Concejo Ejecutivo del Poder Judicial del Perú',
-    bio: 'Máxima autoridad en justicia de paz del Poder Judicial del Perú y miembro del Concejo Ejecutivo. Presenta la experiencia peruana de 203 años de justicia comunitaria, con 5.769 jueces que duplican los jueces ordinarios, y la gestión de 48 lenguas con 100 intérpretes especializados.',
-    temas: ['Experiencia peruana', 'Diversidad lingüística', 'Cooperación internacional', 'SISJUPAZ'],
-    color: '#2D5A27'
-  },
-  {
-    id: 3, pais: 'colombia', categoria: 'magistral',
-    nombre: 'Edgar Augusto Ardila Amaya',
-    rol: 'Conferencista magistral',
-    inst: 'Colombia',
-    bio: 'Referente académico en justicia en equidad y fundamentos de la justicia comunitaria en Colombia. Su conferencia magistral de la tarde profundiza en los fundamentos teóricos de la justicia en equidad y las perspectivas de reforma normativa.',
-    temas: ['Justicia en equidad', 'Fundamentos teóricos', 'Reforma normativa', 'Justicia comunitaria'],
-    color: '#6B3A1F'
-  },
-  {
-    id: 4, pais: 'colombia', categoria: 'magistral',
-    nombre: 'Magaly Camila Ruíz Cajas',
-    rol: 'Conferencista magistral',
-    inst: 'Colombia',
-    bio: 'Analiza la justicia comunitaria y el acceso a la justicia en el contexto latinoamericano, con énfasis en los modelos de resolución alternativa de conflictos y su articulación con los sistemas judiciales formales.',
-    temas: ['Justicia comunitaria latinoamericana', 'Resolución alternativa', 'Acceso a la justicia'],
-    color: '#6B3A1F'
-  },
-  {
-    id: 5, pais: 'colombia', categoria: 'magistral',
-    nombre: 'Gloria Inés Bohórquez Torres',
-    rol: 'Conferencia de cierre',
-    inst: 'Colombia',
-    bio: 'A cargo de la conferencia de cierre del congreso, presenta perspectivas de reforma normativa para los jueces de paz colombianos, recogiendo los debates del día y proyectando líneas de acción hacia la jornada técnica del 9 de julio.',
-    temas: ['Reforma normativa', 'Perspectivas de política pública', 'Ley 497 de 1999'],
-    color: '#6B3A1F'
-  },
-  {
-    id: 6, pais: 'colombia', categoria: 'panel',
-    nombre: 'Marcela Pérez Cárdenas',
-    rol: 'Personera Delegada para Asuntos Policivos y Civiles',
-    inst: 'Personería de Bogotá D.C.',
-    bio: 'Cabeza de la delegación organizadora del congreso. Modera la Sala General del workshop preparatorio (26 de marzo) y la Sala 3 de fortalecimiento institucional. Presenta las conclusiones del congreso. Coordina la articulación interinstitucional entre los tres países.',
-    temas: ['Organización del congreso', 'Fortalecimiento institucional', 'Conclusiones', 'Articulación andina'],
-    color: '#6B3A1F'
-  },
-  {
-    id: 7, pais: 'colombia', categoria: 'panel',
-    nombre: 'Héctor Enrique Peña Salgado',
-    rol: 'Magistrado',
-    inst: 'Consejo Seccional de la Judicatura de Bogotá',
-    bio: 'Magistrado del Consejo Seccional de la Judicatura de Bogotá. Modera el Panel 2 sobre convivencia y legitimidad social. Aporta la perspectiva de la rama judicial colombiana en la supervisión y control de la justicia de paz.',
-    temas: ['Supervisión judicial', 'Control disciplinario', 'Rama Judicial', 'Legitimidad'],
-    color: '#6B3A1F'
-  },
-  {
-    id: 8, pais: 'colombia', categoria: 'panel',
-    nombre: 'Adriana Covelli Soto',
-    rol: 'Asesora',
-    inst: 'Consejo Superior de la Judicatura · Colombia',
-    bio: 'Asesora del Consejo Superior de la Judicatura con expertise en la regulación y gestión de los jueces de paz colombianos. Participa en el Panel 1 aportando la perspectiva institucional sobre los aspectos formales y reglamentarios.',
-    temas: ['Reglamentación', 'Acuerdos del Consejo', 'Formación permanente'],
-    color: '#6B3A1F'
-  },
-  {
-    id: 9, pais: 'colombia', categoria: 'panel',
-    nombre: 'Diana María Vélez Vásquez',
-    rol: 'Magistrada',
-    inst: 'Comisión Nacional de Disciplina Judicial · Colombia',
-    bio: 'Magistrada de la Comisión Nacional de Disciplina Judicial, órgano de control disciplinario de los jueces de paz en Colombia. Aporta datos sobre decisiones disciplinarias y el enfoque preventivo vs. sancionatorio en el control de la figura.',
-    temas: ['Control disciplinario', 'CNDJ', 'Remoción del cargo', 'Garantías procesales'],
-    color: '#6B3A1F'
-  },
-  {
-    id: 10, pais: 'colombia', categoria: 'panel',
-    nombre: 'César Andrés Restrepo Flórez',
-    rol: 'Secretario Distrital',
-    inst: 'Secretaría Distrital de Seguridad, Convivencia y Justicia · Bogotá',
-    bio: 'Secretario Distrital de Seguridad, Convivencia y Justicia de Bogotá. Representa la perspectiva distrital en el Panel 3, abordando la articulación entre los jueces de paz y la política pública de convivencia y justicia de la ciudad.',
-    temas: ['Política distrital', 'Convivencia', 'Articulación institucional', 'Justicia local'],
-    color: '#6B3A1F'
-  },
-  {
-    id: 11, pais: 'colombia', categoria: 'panel',
-    nombre: 'Arturo Suárez Acero',
-    rol: 'Subdirector de Justicia',
-    inst: 'Departamento Nacional de Planeación (DNP)',
-    bio: 'Subdirector de Justicia del DNP. Modera el Panel 2 en el workshop preparatorio. Aporta la perspectiva de planificación nacional sobre la sostenibilidad y el financiamiento de la justicia de paz como política pública.',
-    temas: ['Política nacional', 'Financiamiento', 'Planeación', 'Sostenibilidad'],
-    color: '#6B3A1F'
-  },
-  {
-    id: 12, pais: 'ecuador', categoria: 'panel',
-    nombre: 'Alisson Mora Pazmiño',
-    rol: 'Subdirectora Nacional de Centros de Mediación y Justicia de Paz',
-    inst: 'Consejo de la Judicatura · Ecuador',
-    bio: 'Autoridad nacional en justicia de paz ecuatoriana. Presenta el modelo de Ecuador: 400 jueces elegidos comunitariamente, sin período fijo, con una tasa de conciliación cercana al 80% y el enfoque de acompañamiento técnico no sancionatorio.',
-    temas: ['Modelo ecuatoriano', 'Mediación', 'Elección comunitaria', 'Tasa de conciliación'],
-    color: '#A0522D'
-  },
-  {
-    id: 13, pais: 'ecuador', categoria: 'panel',
-    nombre: 'Evelyn del Hierro Herrera',
-    rol: 'Analista Nacional de Justicia de Paz',
-    inst: 'Consejo de la Judicatura · Ecuador',
-    bio: 'Analista especializada en justicia de paz del Consejo de la Judicatura de Ecuador. Aporta datos operativos sobre el funcionamiento del sistema y las experiencias de articulación interinstitucional con universidades y gobiernos locales.',
-    temas: ['Operación del sistema', 'Articulación local', 'Datos operativos', 'Formación'],
-    color: '#A0522D'
-  },
-  {
-    id: 14, pais: 'ecuador', categoria: 'panel',
-    nombre: 'Rosa Obregón',
-    rol: 'Jueza de Paz',
-    inst: 'Ecuador',
-    bio: 'Jueza de paz ecuatoriana con experiencia directa en la resolución de conflictos comunitarios. Su participación en el Panel 3 aporta la perspectiva práctica de quien ejerce la función en territorio, incluyendo los desafíos cotidianos de la figura.',
-    temas: ['Práctica comunitaria', 'Resolución de conflictos', 'Experiencia territorial'],
-    color: '#A0522D'
-  },
-  {
-    id: 15, pais: 'ecuador', categoria: 'panel',
-    nombre: 'Mónica Larrea',
-    rol: 'Docente e investigadora',
-    inst: 'Universidad ECOTEC · Ecuador',
-    bio: 'Académica e investigadora de la Universidad ECOTEC de Ecuador. Aporta la perspectiva universitaria en el fortalecimiento de la justicia de paz, con énfasis en los modelos de formación continua y la articulación entre academia e instituciones de justicia.',
-    temas: ['Academia', 'Formación continua', 'Investigación', 'Articulación universidad-justicia'],
-    color: '#A0522D'
-  },
-  {
-    id: 16, pais: 'peru', categoria: 'panel',
-    nombre: 'Alejandrina Luglio',
-    rol: 'Jefa de la Oficina Nacional de Apoyo a la Justicia de Paz y Justicia Indígena',
-    inst: 'Poder Judicial del Perú',
-    bio: 'Máxima autoridad administrativa de la justicia de paz en el Poder Judicial del Perú. Presenta el modelo peruano de apoyo estructurado, que incluye sistemas tecnológicos (SISJUPAZ y Yachay), dotación de equipos y formación especializada descentralizada.',
-    temas: ['Modelo peruano', 'SISJUPAZ', 'Justicia indígena', 'Apoyo institucional'],
-    color: '#2D5A27'
-  },
-  {
-    id: 17, pais: 'peru', categoria: 'panel',
-    nombre: 'Roxana Vergara',
-    rol: 'Representante',
-    inst: 'PNUD Perú',
-    bio: 'Representante del Programa de las Naciones Unidas para el Desarrollo en Perú. Aporta la perspectiva de la cooperación internacional en el fortalecimiento de la justicia de paz, con énfasis en el acceso a la justicia y los enfoques de derechos humanos.',
-    temas: ['Cooperación internacional', 'PNUD', 'Derechos humanos', 'Acceso a la justicia'],
-    color: '#2D5A27'
-  },
-  {
-    id: 18, pais: 'peru', categoria: 'panel',
-    nombre: 'Rosa Noemí Rosas Barrios',
-    rol: 'Jueza de Paz',
-    inst: 'Perú',
-    bio: 'Jueza de paz peruana con experiencia en la resolución de conflictos en comunidades rurales. Su participación refleja la diversidad del sistema peruano y aporta la voz directa de los operadores de justicia en territorio.',
-    temas: ['Justicia rural', 'Práctica comunitaria', 'Diversidad cultural'],
-    color: '#2D5A27'
-  }
+  // ── INSTALACIÓN ──
+  { id: 100, pais: 'colombia', categoria: 'apertura', nombre: 'Andrés Castro Franco',
+    rol: 'Personero de Bogotá D.C.', inst: 'Personería de Bogotá',
+    bio: 'Personero de Bogotá D.C., cabeza de la entidad organizadora del congreso. Pronuncia las palabras de apertura del evento, en representación del Ministerio Público distrital y de su compromiso con el fortalecimiento de la jurisdicción de paz.',
+    temas: ['Palabras de apertura', 'Ministerio Público', 'Política institucional'], color: AZUL },
+  { id: 101, pais: 'colombia', categoria: 'apertura', nombre: 'Rector — Universidad Santo Tomás',
+    rol: 'Rector', inst: 'Universidad Santo Tomás (USTA)',
+    bio: 'En representación de la institución académica anfitriona, brinda el saludo institucional de la Universidad Santo Tomás, sede del congreso y aliada en el componente académico del evento.',
+    temas: ['Saludo institucional', 'Academia', 'Sede anfitriona'], color: AZUL },
+  { id: 102, pais: 'colombia', categoria: 'apertura', nombre: 'Iván Darío Tarazona',
+    rol: 'Decano · Facultad de Derecho', inst: 'Universidad Santo Tomás',
+    bio: 'Decano de la Facultad de Derecho de la Universidad Santo Tomás. Participa en la instalación del congreso y representa el vínculo entre la formación jurídica universitaria y la justicia comunitaria de paz.',
+    temas: ['Saludo institucional', 'Formación jurídica', 'Facultad de Derecho'], color: AZUL },
+  { id: 103, pais: 'colombia', categoria: 'apertura', nombre: 'Jorge Iván Cuervo',
+    rol: 'Ministerio de Justicia y del Derecho', inst: 'República de Colombia',
+    bio: 'Representa al Ministerio de Justicia y del Derecho en la instalación del congreso, entidad de apoyo del evento y actor clave en las discusiones sobre la actualización del marco normativo de los jueces de paz.',
+    temas: ['Saludo institucional', 'Política de justicia', 'Marco normativo'], color: AZUL },
+  { id: 104, pais: 'colombia', categoria: 'apertura', nombre: 'Mary Lucero Novoa',
+    rol: 'Presidenta', inst: 'Consejo Superior de la Judicatura',
+    bio: 'Presidenta del Consejo Superior de la Judicatura, máximo órgano de gobierno y administración de la Rama Judicial colombiana, responsable del Programa General de Formación de los jueces de paz. Interviene en la instalación protocolaria.',
+    temas: ['Saludo institucional', 'Rama Judicial', 'Formación de jueces de paz'], color: AZUL },
+
+  // ── CONFERENCISTAS MAGISTRALES ──
+  { id: 1, pais: 'colombia', categoria: 'magistral', nombre: 'Liliana Cardona Chagüi',
+    rol: 'Magistrada · Conferencista · Moderadora Panel 1', inst: 'Consejo Superior de la Judicatura',
+    bio: 'Magistrada del Consejo Superior de la Judicatura. Abre el programa académico con la conferencia "Estado actual y perspectivas de la Jurisdicción de Paz en Colombia" y modera el Panel 1 sobre aspectos formales y reglamentarios.',
+    temas: ['Jurisdicción de paz', 'Estado actual', 'Perspectivas institucionales'], color: AZUL },
+  { id: 2, pais: 'peru', categoria: 'magistral', nombre: 'Johnny Cáceres Valencia',
+    rol: 'Responsable de la Justicia de Paz a nivel nacional', inst: 'Concejo Ejecutivo del Poder Judicial del Perú',
+    bio: 'Máxima autoridad de la justicia de paz en el Poder Judicial del Perú y miembro del Concejo Ejecutivo. Presenta la experiencia peruana: 203 años de historia desde 1823, 5.769 jueces que duplican a los ordinarios, y la gestión de la diversidad lingüística con 48 lenguas y ~100 intérpretes especializados.',
+    temas: ['Experiencia peruana', 'Diversidad lingüística', 'Cooperación internacional', 'SISJUPAZ'], color: PERU_C },
+  { id: 3, pais: 'colombia', categoria: 'magistral', nombre: 'Magaly Camila Ruíz Cajas',
+    rol: 'Conferencista magistral', inst: 'Colombia',
+    bio: 'Su conferencia "Justicia comunitaria y acceso a la justicia en América Latina" analiza los modelos de resolución alternativa de conflictos en la región y su articulación con los sistemas judiciales formales.',
+    temas: ['Justicia comunitaria latinoamericana', 'Resolución alternativa', 'Acceso a la justicia'], color: AZUL },
+  { id: 4, pais: 'colombia', categoria: 'magistral', nombre: 'Edgar Augusto Ardila Amaya',
+    rol: 'Conferencista magistral', inst: 'Colombia',
+    bio: 'Referente académico en justicia en equidad y justicia comunitaria en Colombia. Su conferencia profundiza en los fundamentos teóricos de la justicia en equidad y las perspectivas de reforma normativa de la figura.',
+    temas: ['Justicia en equidad', 'Fundamentos teóricos', 'Reforma normativa'], color: AZUL },
+  { id: 5, pais: 'colombia', categoria: 'magistral', nombre: 'Gloria Inés Bohórquez Torres',
+    rol: 'Conferencia de cierre', inst: 'Colombia',
+    bio: 'A cargo de la conferencia de cierre: "Perspectivas de reforma normativa para los jueces de paz". Recoge los debates de la jornada y proyecta las líneas de acción del congreso hacia la política pública.',
+    temas: ['Reforma normativa', 'Política pública', 'Ley 497 de 1999'], color: AZUL },
+
+  // ── COLOMBIA · PANELES Y ORGANIZACIÓN ──
+  { id: 6, pais: 'colombia', categoria: 'panel', nombre: 'Marcela Pérez Cárdenas',
+    rol: 'Personera Delegada para Asuntos Policivos y Civiles', inst: 'Personería de Bogotá D.C.',
+    bio: 'Lidera la delegación organizadora del congreso. Moderó la Sala General y la Sala 3 del workshop preparatorio y presenta las conclusiones del congreso. Coordina la articulación interinstitucional entre los tres países.',
+    temas: ['Conclusiones del congreso', 'Fortalecimiento institucional', 'Articulación andina'], color: AZUL },
+  { id: 7, pais: 'colombia', categoria: 'panel', nombre: 'Andrés Felipe Torres Hurtado',
+    rol: 'Agente Ministerio Público · Moderador Panel 3', inst: 'Personería de Bogotá D.C.',
+    bio: 'Agente del Ministerio Público de la Personería de Bogotá. Moderó la Sala 1 del workshop preparatorio (aspectos formales y reglamentarios) y modera el Panel 3 del congreso sobre fortalecimiento institucional, marco normativo, incentivos y sostenibilidad.',
+    temas: ['Fortalecimiento institucional', 'Aspectos reglamentarios', 'Ministerio Público'], color: AZUL },
+  { id: 8, pais: 'colombia', categoria: 'panel', nombre: 'Héctor Enrique Peña Salgado',
+    rol: 'Magistrado · Moderador Panel 2', inst: 'Consejo Seccional de la Judicatura de Bogotá',
+    bio: 'Magistrado del Consejo Seccional de la Judicatura de Bogotá. Modera el Panel 2 sobre convivencia y legitimidad social, aportando la perspectiva de la Rama Judicial en la supervisión y acompañamiento de los jueces de paz del distrito.',
+    temas: ['Supervisión judicial', 'Rama Judicial', 'Legitimidad'], color: AZUL },
+  { id: 9, pais: 'colombia', categoria: 'panel', nombre: 'Adriana Covelli Soto',
+    rol: 'Asesora', inst: 'Consejo Superior de la Judicatura',
+    bio: 'Asesora del Consejo Superior de la Judicatura con expertise en la regulación y gestión de los jueces de paz colombianos. Participa en el Panel 1 con la perspectiva institucional sobre los aspectos formales y reglamentarios de la figura.',
+    temas: ['Reglamentación', 'Acuerdos del Consejo', 'Formación permanente'], color: AZUL },
+  { id: 10, pais: 'colombia', categoria: 'panel', nombre: 'Diana María Vélez Vásquez',
+    rol: 'Magistrada', inst: 'Comisión Nacional de Disciplina Judicial',
+    bio: 'Magistrada de la Comisión Nacional de Disciplina Judicial, órgano de control disciplinario de los jueces de paz. Aporta al Panel 1 la perspectiva del control con enfoque preventivo y las garantías procesales de los jueces.',
+    temas: ['Control disciplinario', 'CNDJ', 'Garantías procesales'], color: AZUL },
+  { id: 11, pais: 'colombia', categoria: 'panel', nombre: 'César Andrés Restrepo Flórez',
+    rol: 'Secretario Distrital', inst: 'Secretaría de Seguridad, Convivencia y Justicia · Bogotá',
+    bio: 'Secretario Distrital de Seguridad, Convivencia y Justicia de Bogotá. Participa en el Panel 3 con la perspectiva distrital sobre la articulación entre los jueces de paz y la política pública de convivencia y justicia de la ciudad.',
+    temas: ['Política distrital', 'Convivencia', 'Justicia local'], color: AZUL },
+  { id: 12, pais: 'colombia', categoria: 'panel', nombre: 'Fabio Saúl Castro Herrera',
+    rol: 'Asesor', inst: 'Ministerio de Justicia y del Derecho',
+    bio: 'Asesor del Ministerio de Justicia y del Derecho. Participó en la Sala 3 del workshop y aporta al Panel 3 la perspectiva del Gobierno Nacional sobre la actualización normativa y la política pública de justicia local.',
+    temas: ['Política nacional de justicia', 'Reforma normativa', 'Justicia local'], color: AZUL },
+  { id: 13, pais: 'colombia', categoria: 'panel', nombre: 'Arturo Suárez Acero',
+    rol: 'Subdirector de Justicia', inst: 'Departamento Nacional de Planeación (DNP)',
+    bio: 'Subdirector de Justicia del DNP, entidad de apoyo del congreso. Moderó la Sala 2 del workshop preparatorio. Aporta la perspectiva de planeación nacional sobre financiamiento y sostenibilidad de la justicia de paz como política pública.',
+    temas: ['Planeación nacional', 'Financiamiento', 'Sostenibilidad'], color: AZUL },
+  { id: 14, pais: 'colombia', categoria: 'panel', nombre: 'Fabián Villalba Mayorga',
+    rol: 'Funcionario', inst: 'Consejo Seccional de la Judicatura de Cundinamarca y Bogotá',
+    bio: 'Del Consejo Seccional de la Judicatura de Cundinamarca y Bogotá. Participó en la Sala 2 del workshop y participa en el Panel 2, con la mirada de la administración judicial territorial sobre el funcionamiento de la jurisdicción de paz.',
+    temas: ['Administración judicial', 'Jurisdicción territorial', 'Convivencia'], color: AZUL },
+  { id: 15, pais: 'colombia', categoria: 'panel', nombre: 'Hugo Humberto Soler',
+    rol: 'Funcionario', inst: 'Secretaría Distrital de Seguridad, Convivencia y Justicia',
+    bio: 'De la Secretaría Distrital de Seguridad, Convivencia y Justicia de Bogotá. Participó en las Salas 1 y 2 del workshop y aporta al Panel 2 la experiencia distrital en la implementación y cobertura de la justicia de paz en Bogotá.',
+    temas: ['Implementación distrital', 'Cobertura', 'Sistemas locales de justicia'], color: AZUL },
+
+  // ── ECUADOR ──
+  { id: 16, pais: 'ecuador', categoria: 'panel', nombre: 'Alisson Mora Pazmiño',
+    rol: 'Subdirectora Nacional de Centros de Mediación y Justicia de Paz', inst: 'Consejo de la Judicatura · Ecuador',
+    bio: 'Autoridad nacional de la justicia de paz ecuatoriana. Presenta el modelo de Ecuador: 400 jueces elegidos comunitariamente, sin período fijo, con tasa de conciliación cercana al 80% y un enfoque de acompañamiento técnico no sancionatorio.',
+    temas: ['Modelo ecuatoriano', 'Mediación', 'Elección comunitaria'], color: VERDE },
+  { id: 17, pais: 'ecuador', categoria: 'panel', nombre: 'Evelyn del Hierro Herrera',
+    rol: 'Analista Nacional de Justicia de Paz', inst: 'Consejo de la Judicatura · Ecuador',
+    bio: 'Analista nacional especializada en justicia de paz del Consejo de la Judicatura de Ecuador. Participó en la Sala General y la Sala 2 del workshop. Aporta datos operativos del sistema y las experiencias de articulación con universidades y gobiernos locales.',
+    temas: ['Operación del sistema', 'Articulación local', 'Datos operativos'], color: VERDE },
+  { id: 18, pais: 'ecuador', categoria: 'panel', nombre: 'Jenny Violeta Díaz',
+    rol: 'Jueza de Paz', inst: 'Ecuador',
+    bio: 'Jueza de paz ecuatoriana. Participó en la Sala 1 del workshop preparatorio y participa en el Panel 1 del congreso, aportando la voz directa de quien ejerce la justicia de paz en territorio bajo el modelo ecuatoriano de elección comunitaria.',
+    temas: ['Práctica comunitaria', 'Elección comunitaria', 'Experiencia territorial'], color: VERDE },
+  { id: 19, pais: 'ecuador', categoria: 'panel', nombre: 'Patricio Capa',
+    rol: 'Juez de Paz', inst: 'Ecuador',
+    bio: 'Juez de paz ecuatoriano. Participó en la Sala 2 del workshop y participa en el Panel 2, compartiendo su experiencia en la construcción de convivencia y la respuesta comunitaria a la conflictividad desde el territorio.',
+    temas: ['Convivencia', 'Respuesta comunitaria', 'Experiencia territorial'], color: VERDE },
+  { id: 20, pais: 'ecuador', categoria: 'panel', nombre: 'Rosa Obregón',
+    rol: 'Jueza de Paz', inst: 'Ecuador',
+    bio: 'Jueza de paz ecuatoriana. Participó en la Sala 3 del workshop y participa en el Panel 3, aportando la perspectiva práctica sobre las condiciones materiales, los incentivos y los desafíos cotidianos del ejercicio de la función.',
+    temas: ['Condiciones de ejercicio', 'Incentivos', 'Práctica territorial'], color: VERDE },
+  { id: 21, pais: 'ecuador', categoria: 'panel', nombre: 'Mónica Larrea',
+    rol: 'Docente e investigadora', inst: 'Universidad ECOTEC · Ecuador',
+    bio: 'Académica de la Universidad ECOTEC de Ecuador. Participó en la Sala 3 del workshop. Aporta la perspectiva universitaria sobre formación continua y la articulación academia–justicia en el modelo ecuatoriano.',
+    temas: ['Academia', 'Formación continua', 'Articulación universidad-justicia'], color: VERDE },
+  { id: 22, pais: 'ecuador', categoria: 'panel', nombre: 'Sandra Marianela Sánchez Naranjo',
+    rol: 'Funcionaria', inst: 'Subdirección Nacional de Centros de Mediación y Justicia de Paz · Ecuador',
+    bio: 'Del Consejo de la Judicatura de Ecuador, Subdirección Nacional de Centros de Mediación y Justicia de Paz. Participó en la Sala 3 del workshop, aportando al diagnóstico sobre fortalecimiento institucional del modelo ecuatoriano.',
+    temas: ['Fortalecimiento institucional', 'Mediación', 'Modelo ecuatoriano'], color: VERDE },
+  { id: 23, pais: 'ecuador', categoria: 'panel', nombre: 'Estefanía Kastillo Endara',
+    rol: 'Funcionaria', inst: 'Consejo de la Judicatura · Ecuador',
+    bio: 'Del Consejo de la Judicatura de Ecuador. Participó en la Sala 1 del workshop preparatorio, en el diálogo sobre los aspectos formales y reglamentarios de la elección y nombramiento de los jueces de paz.',
+    temas: ['Aspectos reglamentarios', 'Elección de jueces', 'Consejo de la Judicatura'], color: VERDE },
+
+  // ── PERÚ ──
+  { id: 24, pais: 'peru', categoria: 'panel', nombre: 'Alejandrina Luglio',
+    rol: 'Jefa · Oficina Nacional de Apoyo a la Justicia de Paz y Justicia Indígena', inst: 'Poder Judicial del Perú',
+    bio: 'Máxima autoridad administrativa de la justicia de paz en el Poder Judicial del Perú. Presenta el modelo peruano de apoyo estructurado: sistemas tecnológicos (SISJUPAZ y Yachay), dotación de equipos, formación descentralizada y atención de casos de violencia con articulación interinstitucional.',
+    temas: ['Modelo peruano', 'SISJUPAZ y Yachay', 'Justicia indígena'], color: PERU_C },
+  { id: 25, pais: 'peru', categoria: 'panel', nombre: 'Roxana Vergara',
+    rol: 'Representante', inst: 'PNUD Perú',
+    bio: 'Del Programa de las Naciones Unidas para el Desarrollo en Perú. Participó en la Sala 1 del workshop y participa en el Panel 1, con la perspectiva de la cooperación internacional sobre acceso a la justicia y enfoques de derechos.',
+    temas: ['Cooperación internacional', 'PNUD', 'Acceso a la justicia'], color: PERU_C },
+  { id: 26, pais: 'peru', categoria: 'panel', nombre: 'Karim Velasco',
+    rol: 'Representante', inst: 'PNUD Perú',
+    bio: 'Del PNUD Perú. Participó en la Sala 2 del workshop y participa en el Panel 2, aportando la experiencia de los procesos de articulación comunitaria en Perú frente a contextos de conflictividad.',
+    temas: ['Articulación comunitaria', 'Conflictividad', 'Cooperación'], color: PERU_C },
+  { id: 27, pais: 'peru', categoria: 'panel', nombre: 'Lucero Abarca',
+    rol: 'Representante', inst: 'PNUD Perú',
+    bio: 'Del PNUD Perú. Participó en la Sala 3 del workshop y participa en el Panel 3, con la mirada de la cooperación internacional sobre el fortalecimiento institucional y la sostenibilidad del modelo peruano.',
+    temas: ['Fortalecimiento institucional', 'Sostenibilidad', 'Cooperación'], color: PERU_C },
+  { id: 28, pais: 'peru', categoria: 'panel', nombre: 'Rosa Noemí Rosas Barrios',
+    rol: 'Jueza de Paz', inst: 'Perú',
+    bio: 'Jueza de paz peruana con experiencia en resolución de conflictos en comunidades. Participó en la Sala 3 del workshop y participa en el Panel 3, reflejando la diversidad del sistema peruano y la voz de los operadores en territorio.',
+    temas: ['Justicia rural', 'Práctica comunitaria', 'Diversidad cultural'], color: PERU_C },
 ];
 
-// ─── RENDER PONENTES ───
+// ─── RENDER ───
 function getInitials(name) {
-  return name.split(' ').slice(0,2).map(n=>n[0]).join('');
+  return name.replace('—','').trim().split(' ').filter(w=>w.length>2).slice(0,2).map(n=>n[0]).join('') || name.slice(0,2);
 }
+function paisTag(p) { return p === 'colombia' ? '🇨🇴 COL' : p === 'ecuador' ? '🇪🇨 ECU' : '🇵🇪 PER'; }
 
 function renderSpeakers(filter) {
   const grid = document.getElementById('speakers-grid');
@@ -1701,7 +1956,7 @@ function renderSpeakers(filter) {
     <div class="speaker-card" onclick="openModal(${s.id})">
       <div class="sp-header">
         <div class="sp-avatar" style="background:${s.color}">${getInitials(s.nombre)}</div>
-        <span class="sp-pais">${s.pais === 'colombia' ? '🇨🇴 COL' : s.pais === 'ecuador' ? '🇪🇨 ECU' : '🇵🇪 PER'}</span>
+        <span class="sp-pais">${paisTag(s.pais)}</span>
       </div>
       <div class="sp-name">${s.nombre}</div>
       <div class="sp-role">${s.rol}</div>
@@ -1734,28 +1989,145 @@ function closeModal(e) {
   }
 }
 
-// ─── TABS ───
-function switchTab(id, btn) {
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-  btn.classList.add('active');
-  document.getElementById(id).classList.add('active');
+function togglePanel(el) { el.classList.toggle('open'); }
+
+// ─── FAQ ───
+function toggleFaq(el) { el.classList.toggle('open'); }
+
+// ─── CAJA DE PREGUNTAS → CORREO ───
+function enviarPregunta() {
+  const nombre = document.getElementById('pp-nombre').value.trim();
+  const email = document.getElementById('pp-email').value.trim();
+  const mensaje = document.getElementById('pp-mensaje').value.trim();
+  const aviso = document.getElementById('pp-aviso');
+
+  if (!mensaje) {
+    aviso.style.color = '#C0392B';
+    aviso.textContent = 'Por favor escribe tu pregunta antes de enviar.';
+    return;
+  }
+
+  const destino = 'policivo@personeriabogota.gov.co';
+  const asunto = 'Pregunta · Congreso Raíz de Paz (Jueces de Paz)';
+  let cuerpo = mensaje + '\n\n';
+  cuerpo += '— — — — —\n';
+  if (nombre) cuerpo += 'Nombre: ' + nombre + '\n';
+  if (email)  cuerpo += 'Correo de contacto: ' + email + '\n';
+  cuerpo += 'Enviado desde el sitio web del Congreso Raíz de Paz.';
+
+  const link = 'mailto:' + destino +
+    '?subject=' + encodeURIComponent(asunto) +
+    '&body=' + encodeURIComponent(cuerpo);
+
+  window.location.href = link;
+  aviso.style.color = 'var(--verde)';
+  aviso.textContent = 'Abriendo tu correo… si no se abre, escríbenos a policivo@personeriabogota.gov.co';
 }
 
-// ─── PANELES ───
-function togglePanel(el) {
-  el.classList.toggle('open');
-}
-
-// ─── SCROLL ANIMATIONS ───
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); }
+// ─── GLOSARIO TÁCTIL (móvil) ───
+document.querySelectorAll('.glos').forEach(g => {
+  g.addEventListener('click', e => {
+    e.stopPropagation();
+    const wasOpen = g.classList.contains('tapped');
+    document.querySelectorAll('.glos').forEach(x => x.classList.remove('tapped'));
+    if (!wasOpen) g.classList.add('tapped');
   });
-}, { threshold: 0.1 });
+});
+document.addEventListener('click', () => {
+  document.querySelectorAll('.glos').forEach(x => x.classList.remove('tapped'));
+});
+
+// ─── CONTADOR → PROGRESO EN VIVO ───
+// El evento: 8 de julio de 2026, de 7:30 a.m. a 5:00 p.m. (hora Colombia, UTC-5)
+const EVENT_START = new Date('2026-07-08T07:30:00-05:00');
+const EVENT_END   = new Date('2026-07-08T17:00:00-05:00');
+
+// Bloques de la agenda para el progreso en vivo (hora local -05:00)
+const agenda = [
+  { t: '07:30', label: 'Registro de asistentes' },
+  { t: '07:50', label: 'Apertura institucional' },
+  { t: '08:00', label: 'Instalación e intervenciones protocolarias' },
+  { t: '08:30', label: 'Conferencia: Jurisdicción de Paz en Colombia' },
+  { t: '08:50', label: 'Video institucional' },
+  { t: '09:00', label: 'Conferencia: Justicia de paz en el Perú' },
+  { t: '10:00', label: 'Preguntas y respuestas' },
+  { t: '10:20', label: 'Panel 1 · Aspectos formales y reglamentarios' },
+  { t: '11:10', label: 'Preguntas · Panel 1' },
+  { t: '11:30', label: 'Receso' },
+  { t: '11:45', label: 'Panel 2 · Convivencia y legitimidad social' },
+  { t: '12:35', label: 'Preguntas · Panel 2' },
+  { t: '12:55', label: 'Almuerzo' },
+  { t: '14:00', label: 'Conferencia: Justicia comunitaria en A. Latina' },
+  { t: '14:30', label: 'Conferencia: Justicia en equidad' },
+  { t: '15:00', label: 'Panel 3 · Fortalecimiento institucional' },
+  { t: '15:50', label: 'Preguntas · Panel 3' },
+  { t: '16:10', label: 'Conferencia de cierre' },
+  { t: '16:40', label: 'Conclusiones del congreso' },
+  { t: '17:00', label: 'Cierre artístico' },
+];
+function timeToDate(t) { return new Date('2026-07-08T' + t + ':00-05:00'); }
+
+function updateLive() {
+  const now = new Date();
+  const cdRow = document.getElementById('countdownRow');
+  const pRow = document.getElementById('progressRow');
+  const label = document.getElementById('liveLabel');
+  const dot = document.getElementById('liveDot');
+
+  if (now < EVENT_START) {
+    // Modo CONTADOR
+    cdRow.style.display = 'flex';
+    pRow.style.display = 'none';
+    dot.style.display = 'none';
+    label.textContent = 'Faltan para el congreso';
+    const diff = EVENT_START - now;
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cdD').textContent = d;
+    document.getElementById('cdH').textContent = String(h).padStart(2,'0');
+    document.getElementById('cdM').textContent = String(m).padStart(2,'0');
+    document.getElementById('cdS').textContent = String(s).padStart(2,'0');
+  } else if (now >= EVENT_START && now <= EVENT_END) {
+    // Modo PROGRESO EN VIVO
+    cdRow.style.display = 'none';
+    pRow.style.display = 'block';
+    dot.style.display = 'inline-block';
+    label.textContent = 'En vivo · 8 de julio';
+    // bloque actual
+    let current = agenda[0], next = null;
+    for (let i = 0; i < agenda.length; i++) {
+      if (now >= timeToDate(agenda[i].t)) {
+        current = agenda[i];
+        next = agenda[i+1] || null;
+      }
+    }
+    const pct = Math.min(100, Math.max(0, ((now - EVENT_START) / (EVENT_END - EVENT_START)) * 100));
+    document.getElementById('progressNow').textContent = '▶ Ahora: ' + current.label;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressNext').textContent = next
+      ? 'A continuación (' + next.t + '): ' + next.label
+      : 'Última actividad de la jornada';
+  } else {
+    // Después del evento
+    cdRow.style.display = 'none';
+    pRow.style.display = 'block';
+    dot.style.display = 'none';
+    label.textContent = 'Congreso finalizado';
+    document.getElementById('progressNow').textContent = '✓ Gracias por acompañarnos';
+    document.getElementById('progressFill').style.width = '100%';
+    document.getElementById('progressNext').textContent = 'Revisa la biblioteca para los documentos del congreso.';
+  }
+}
+updateLive();
+setInterval(updateLive, 1000);
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
 document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-// ─── INIT ───
 renderSpeakers('all');
 </script>
 </body>
